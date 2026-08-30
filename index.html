@@ -55,7 +55,7 @@ LOGIN
 .login-card{
     width:100%;
     max-width:470px;
-    background:rgba(255,255,255,.92);
+    background:rgba(255,255,255,.93);
     backdrop-filter:blur(18px);
     border-radius:30px;
     padding:38px;
@@ -101,6 +101,11 @@ LOGIN
     background:white;
     cursor:pointer;
     transition:.2s;
+}
+
+.language:hover,
+.gender:hover{
+    transform:translateY(-2px);
 }
 
 .language.active{
@@ -159,6 +164,12 @@ select:focus{
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
+    transition:.2s;
+}
+
+.continue:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(128,108,255,.25);
 }
 
 /* =========================
@@ -177,7 +188,7 @@ CUSTOMIZE
     margin:auto;
     display:grid;
     grid-template-columns:45% 55%;
-    background:rgba(255,255,255,.9);
+    background:rgba(255,255,255,.92);
     backdrop-filter:blur(20px);
     border-radius:32px;
     overflow:hidden;
@@ -211,9 +222,18 @@ CHARACTER AREA
     flex-direction:column;
     align-items:center;
     justify-content:center;
+    animation:float 3s ease-in-out infinite;
 }
 
-/* floor */
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-7px);
+    }
+}
 
 .floor{
     position:absolute;
@@ -224,7 +244,9 @@ CHARACTER AREA
     background:rgba(80,70,130,.12);
 }
 
-/* head */
+/* =========================
+HEAD
+========================= */
 
 .head{
     position:relative;
@@ -235,14 +257,16 @@ CHARACTER AREA
     z-index:5;
 }
 
-/* hair */
+/* =========================
+HAIR
+========================= */
 
 .hair{
     position:absolute;
     top:-22px;
     left:-8px;
     width:141px;
-    height:85px;
+    height:82px;
     background:#4b3428;
     border-radius:70px 70px 35px 35px;
     z-index:7;
@@ -268,7 +292,58 @@ CHARACTER AREA
     right:0;
 }
 
-/* eyes */
+.hair.short{
+    height:58px;
+    border-radius:60px 60px 25px 25px;
+}
+
+.hair.curly{
+    height:90px;
+    border-radius:45%;
+    box-shadow:
+        -12px 10px 0 #4b3428,
+        12px 10px 0 #4b3428;
+}
+
+.hair.ponytail{
+    height:78px;
+}
+
+.hair.ponytail::after{
+    content:"";
+    position:absolute;
+    width:35px;
+    height:80px;
+    background:inherit;
+    border-radius:50%;
+    right:-25px;
+    top:30px;
+}
+
+.hair.bun{
+    height:65px;
+    border-radius:50%;
+}
+
+.hair.bun::after{
+    content:"";
+    position:absolute;
+    width:48px;
+    height:48px;
+    background:inherit;
+    border-radius:50%;
+    left:46px;
+    top:-32px;
+}
+
+.hair.wavy{
+    height:88px;
+    border-radius:45% 55% 35% 50%;
+}
+
+/* =========================
+FACE
+========================= */
 
 .eye{
     position:absolute;
@@ -278,6 +353,7 @@ CHARACTER AREA
     background:#222;
     border-radius:50%;
     z-index:8;
+    transition:.3s;
 }
 
 .eye::after{
@@ -299,8 +375,6 @@ CHARACTER AREA
     right:30px;
 }
 
-/* smile */
-
 .smile{
     position:absolute;
     top:91px;
@@ -310,9 +384,12 @@ CHARACTER AREA
     border-bottom:3px solid #333;
     border-radius:50%;
     z-index:8;
+    transition:.3s;
 }
 
-/* body */
+/* =========================
+BODY
+========================= */
 
 .avatar-body{
     position:relative;
@@ -324,8 +401,6 @@ CHARACTER AREA
     margin-top:-2px;
     transition:.3s;
 }
-
-/* arms */
 
 .avatar-body::before,
 .avatar-body::after{
@@ -348,7 +423,9 @@ CHARACTER AREA
     transform:rotate(-8deg);
 }
 
-/* legs */
+/* =========================
+LEGS
+========================= */
 
 .legs{
     display:flex;
@@ -364,7 +441,9 @@ CHARACTER AREA
     transition:.3s;
 }
 
-/* shoes */
+/* =========================
+SHOES
+========================= */
 
 .shoes{
     display:flex;
@@ -381,7 +460,9 @@ CHARACTER AREA
     transition:.3s;
 }
 
-/* accessory */
+/* =========================
+ACCESSORY
+========================= */
 
 .accessory{
     position:absolute;
@@ -393,7 +474,7 @@ CHARACTER AREA
 }
 
 /* =========================
-EDIT COLOR BUTTON
+PEN BUTTON
 ========================= */
 
 .color-edit{
@@ -401,8 +482,8 @@ EDIT COLOR BUTTON
     left:20px;
     top:50%;
     transform:translateY(-50%);
-    width:52px;
-    height:52px;
+    width:54px;
+    height:54px;
     border:none;
     border-radius:17px;
     background:white;
@@ -410,6 +491,11 @@ EDIT COLOR BUTTON
     font-size:24px;
     cursor:pointer;
     z-index:20;
+    transition:.2s;
+}
+
+.color-edit:hover{
+    transform:translateY(-50%) scale(1.05);
 }
 
 /* =========================
@@ -486,6 +572,11 @@ OPTIONS
     border-radius:13px;
     cursor:pointer;
     font-weight:bold;
+    transition:.2s;
+}
+
+.category:hover{
+    transform:translateY(-2px);
 }
 
 .category.active{
@@ -519,6 +610,69 @@ OPTIONS
     background:#f4f1ff;
 }
 
+/* Hair previews */
+
+.hair-option{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+}
+
+.hair-preview{
+    width:45px;
+    height:45px;
+    background:#4b3428;
+    border-radius:50%;
+    position:relative;
+}
+
+.hair-preview.long{
+    height:55px;
+}
+
+.hair-preview.short{
+    height:38px;
+}
+
+.hair-preview.curly{
+    border-radius:45%;
+    box-shadow:
+        -7px 7px 0 #4b3428,
+        7px 7px 0 #4b3428;
+}
+
+.hair-preview.ponytail::after{
+    content:"";
+    position:absolute;
+    width:18px;
+    height:32px;
+    background:inherit;
+    border-radius:50%;
+    right:-10px;
+    top:18px;
+}
+
+.hair-preview.bun::after{
+    content:"";
+    position:absolute;
+    width:23px;
+    height:23px;
+    background:inherit;
+    border-radius:50%;
+    top:-13px;
+    left:11px;
+}
+
+.hair-preview.wavy{
+    border-radius:45% 55% 35% 50%;
+}
+
+/* =========================
+SAVE
+========================= */
+
 .save-character{
     width:100%;
     margin-top:25px;
@@ -530,108 +684,14 @@ OPTIONS
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
-}
-/* =========================
-HAIR PREVIEWS
-========================= */
-
-.hair-option{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
+    transition:.2s;
 }
 
-.hair-option small{
-    font-size:12px;
-    color:#666;
+.save-character:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(128,108,255,.25);
 }
 
-.preview-hair{
-    width:48px;
-    height:48px;
-    display:block;
-    position:relative;
-    background:#4b3428;
-    border-radius:50% 50% 35% 35%;
-}
-
-/* Long */
-
-.long-preview{
-    height:55px;
-}
-
-.long-preview::before,
-.long-preview::after{
-    content:"";
-    position:absolute;
-    width:12px;
-    height:35px;
-    background:inherit;
-    top:25px;
-    border-radius:10px;
-}
-
-.long-preview::before{
-    left:2px;
-}
-
-.long-preview::after{
-    right:2px;
-}
-
-/* Short */
-
-.short-preview{
-    height:38px;
-    border-radius:50% 50% 25% 25%;
-}
-
-/* Curly */
-
-.curly-preview{
-    border-radius:45%;
-    box-shadow:
-        -8px 8px 0 #4b3428,
-        8px 8px 0 #4b3428,
-        0 13px 0 #4b3428;
-}
-
-/* Ponytail */
-
-.ponytail-preview::after{
-    content:"";
-    position:absolute;
-    width:20px;
-    height:38px;
-    background:inherit;
-    border-radius:50%;
-    right:-12px;
-    top:18px;
-}
-
-/* Bun */
-
-.bun-preview::after{
-    content:"";
-    position:absolute;
-    width:24px;
-    height:24px;
-    background:inherit;
-    border-radius:50%;
-    top:-15px;
-    left:12px;
-}
-
-/* Wavy */
-
-.wavy-preview{
-    border-radius:
-        45% 55% 40% 50%;
-    height:52px;
-}
 /* =========================
 MOBILE
 ========================= */
@@ -821,14 +881,14 @@ Continue →
 </div>
 
 <!-- =================================================
-CUSTOMIZE
+CUSTOMIZE SCREEN
 ================================================= -->
 
 <div id="customizeScreen">
 
 <div class="customize">
 
-<!-- CHARACTER -->
+<!-- CHARACTER AREA -->
 
 <div class="character-area">
 
@@ -851,6 +911,7 @@ id="colorPanel">
 <span>Hair</span>
 
 <input
+id="hairColor"
 type="color"
 value="#4b3428"
 oninput="changeColor('hair',this.value)">
@@ -862,6 +923,7 @@ oninput="changeColor('hair',this.value)">
 <span>Outfit</span>
 
 <input
+id="shirtColor"
 type="color"
 value="#806cff"
 oninput="changeColor('shirt',this.value)">
@@ -873,6 +935,7 @@ oninput="changeColor('shirt',this.value)">
 <span>Pants</span>
 
 <input
+id="pantsColor"
 type="color"
 value="#35405c"
 oninput="changeColor('pants',this.value)">
@@ -884,6 +947,7 @@ oninput="changeColor('pants',this.value)">
 <span>Shoes</span>
 
 <input
+id="shoesColor"
 type="color"
 value="#ffffff"
 oninput="changeColor('shoes',this.value)">
@@ -1046,14 +1110,11 @@ onclick="saveCharacter()">
 VARIABLES
 ========================= */
 
-let language = "en";
+let language="en";
 
-let gender = "";
+let gender="";
 
-let currentCategory = "hair";
-
-
-let character = {
+let character={
 
 hair:"#4b3428",
 
@@ -1089,6 +1150,7 @@ document
 .getElementById("arabicBtn")
 .classList
 .toggle("active",lang==="ar");
+
 
 if(lang==="ar"){
 
@@ -1169,13 +1231,14 @@ function chooseGender(type){
 
 gender=type;
 
+
 document
 .getElementById("girlBtn")
-.classList.remove("selected");
+.classList.remove("selected","girl");
 
 document
 .getElementById("boyBtn")
-.classList.remove("selected");
+.classList.remove("selected","boy");
 
 
 if(type==="girl"){
@@ -1228,6 +1291,7 @@ language==="ar"
 );
 
 return;
+
 }
 
 
@@ -1257,10 +1321,12 @@ language
 );
 
 
-document.getElementById("loginScreen")
+document
+.getElementById("loginScreen")
 .style.display="none";
 
-document.getElementById("customizeScreen")
+document
+.getElementById("customizeScreen")
 .style.display="block";
 
 
@@ -1278,9 +1344,6 @@ CATEGORY
 
 function showCategory(category,button){
 
-currentCategory=category;
-
-
 document
 .querySelectorAll(".category")
 .forEach(
@@ -1296,138 +1359,260 @@ const items=document
 items.innerHTML="";
 
 
+/* HAIR */
+
 if(category==="hair"){
 
 items.innerHTML=`
 
-<button class="item hair-option" onclick="hairStyle('long',this)">
-    <span class="preview-hair long-preview"></span>
-    <small>Long</small>
+<button class="item hair-option"
+onclick="hairStyle('long',this)">
+
+<span class="hair-preview long"></span>
+
+<small>Long</small>
+
 </button>
 
-<button class="item hair-option" onclick="hairStyle('short',this)">
-    <span class="preview-hair short-preview"></span>
-    <small>Short</small>
+
+<button class="item hair-option"
+onclick="hairStyle('short',this)">
+
+<span class="hair-preview short"></span>
+
+<small>Short</small>
+
 </button>
 
-<button class="item hair-option" onclick="hairStyle('curly',this)">
-    <span class="preview-hair curly-preview"></span>
-    <small>Curly</small>
+
+<button class="item hair-option"
+onclick="hairStyle('curly',this)">
+
+<span class="hair-preview curly"></span>
+
+<small>Curly</small>
+
 </button>
 
-<button class="item hair-option" onclick="hairStyle('ponytail',this)">
-    <span class="preview-hair ponytail-preview"></span>
-    <small>Ponytail</small>
+
+<button class="item hair-option"
+onclick="hairStyle('ponytail',this)">
+
+<span class="hair-preview ponytail"></span>
+
+<small>Ponytail</small>
+
 </button>
 
-<button class="item hair-option" onclick="hairStyle('bun',this)">
-    <span class="preview-hair bun-preview"></span>
-    <small>Bun</small>
+
+<button class="item hair-option"
+onclick="hairStyle('bun',this)">
+
+<span class="hair-preview bun"></span>
+
+<small>Bun</small>
+
 </button>
 
-<button class="item hair-option" onclick="hairStyle('wavy',this)">
-    <span class="preview-hair wavy-preview"></span>
-    <small>Wavy</small>
+
+<button class="item hair-option"
+onclick="hairStyle('wavy',this)">
+
+<span class="hair-preview wavy"></span>
+
+<small>Wavy</small>
+
 </button>
 
 `;
 
+}
 
 
+/* FACE */
 
 if(category==="face"){
 
 items.innerHTML=`
 
-<button class="item" onclick="faceStyle('normal',this)">
+<button class="item"
+onclick="faceStyle('normal',this)">
 😊
+<br>
+<small>Normal</small>
 </button>
 
-<button class="item" onclick="faceStyle('happy',this)">
+<button class="item"
+onclick="faceStyle('happy',this)">
 😄
+<br>
+<small>Happy</small>
 </button>
 
-<button class="item" onclick="faceStyle('calm',this)">
+<button class="item"
+onclick="faceStyle('calm',this)">
 😌
+<br>
+<small>Calm</small>
 </button>
 
-<button class="item" onclick="faceStyle('cool',this)">
+<button class="item"
+onclick="faceStyle('cool',this)">
 😎
+<br>
+<small>Cool</small>
 </button>
 
 `;
 
 }
 
+
+/* CLOTHES */
 
 if(category==="clothes"){
 
 items.innerHTML=`
 
-<button class="item" onclick="changeColor('shirt','#806cff');selectItem(this)">
+<button class="item"
+onclick="changeColor('shirt','#806cff');selectItem(this)">
 👕
+<br>
+<small>T-Shirt</small>
 </button>
 
-<button class="item" onclick="changeColor('shirt','#ff72ae');selectItem(this)">
+<button class="item"
+onclick="changeColor('shirt','#ff72ae');selectItem(this)">
 👚
+<br>
+<small>Sweater</small>
 </button>
 
-<button class="item" onclick="changeColor('shirt','#4d9cff');selectItem(this)">
+<button class="item"
+onclick="changeColor('shirt','#4d9cff');selectItem(this)">
 🧥
+<br>
+<small>Jacket</small>
 </button>
 
-<button class="item" onclick="changeColor('shirt','#54b88b');selectItem(this)">
+<button class="item"
+onclick="changeColor('shirt','#54b88b');selectItem(this)">
 🧶
+<br>
+<small>Oversized</small>
 </button>
 
-<button class="item" onclick="changeColor('shirt','#f0a64b');selectItem(this)">
+<button class="item"
+onclick="changeColor('shirt','#f0a64b');selectItem(this)">
 🏃
+<br>
+<small>Sport</small>
 </button>
 
-<button class="item" onclick="changeColor('shirt','#444');selectItem(this)">
+<button class="item"
+onclick="changeColor('shirt','#444444');selectItem(this)">
 🎮
+<br>
+<small>Gaming</small>
+</button>
+
+<button class="item"
+onclick="changeColor('shirt','#e66b5d');selectItem(this)">
+👔
+<br>
+<small>Shirt</small>
+</button>
+
+<button class="item"
+onclick="changeColor('shirt','#7b61a8');selectItem(this)">
+🎓
+<br>
+<small>School</small>
 </button>
 
 `;
 
 }
 
+
+/* PANTS */
 
 if(category==="pants"){
 
 items.innerHTML=`
 
-<button class="item" onclick="changeColor('pants','#35405c');selectItem(this)">
+<button class="item"
+onclick="changeColor('pants','#35405c');selectItem(this)">
 👖
+<br>
+<small>Jeans</small>
 </button>
 
-<button class="item" onclick="changeColor('pants','#496c9e');selectItem(this)">
+<button class="item"
+onclick="changeColor('pants','#496c9e');selectItem(this)">
 🩳
+<br>
+<small>Shorts</small>
 </button>
 
-<button class="item" onclick="changeColor('pants','#754c36');selectItem(this)">
-🤎
+<button class="item"
+onclick="changeColor('pants','#754c36');selectItem(this)">
+👖
+<br>
+<small>Cargo</small>
 </button>
 
 `;
 
 }
 
+
+/* SHOES */
 
 if(category==="shoes"){
 
 items.innerHTML=`
 
-<button class="item" onclick="changeColor('shoes','#ffffff');selectItem(this)">
+<button class="item"
+onclick="changeColor('shoes','#ffffff');selectItem(this)">
 👟
+<br>
+<small>Sneakers</small>
 </button>
 
-<button class="item" onclick="changeColor('shoes','#222222');selectItem(this)">
+<button class="item"
+onclick="changeColor('shoes','#222222');selectItem(this)">
 🥾
+<br>
+<small>Boots</small>
 </button>
 
-<button class="item" onclick="changeColor('shoes','#ff72ae');selectItem(this)">
+<button class="item"
+onclick="changeColor('shoes','#ff72ae');selectItem(this)">
 👟
+<br>
+<small>Pink</small>
+</button>
+
+<button class="item"
+onclick="changeColor('shoes','#4d9cff');selectItem(this)">
+👟
+<br>
+<small>Blue</small>
+</button>
+
+<button class="item"
+onclick="changeColor('shoes','#54b88b');selectItem(this)">
+👟
+<br>
+<small>Sport</small>
+</button>
+
+<button class="item"
+onclick="changeColor('shoes','#f0a64b');selectItem(this)">
+👞
+<br>
+<small>Classic</small>
 </button>
 
 `;
@@ -1435,32 +1620,52 @@ items.innerHTML=`
 }
 
 
+/* ACCESSORIES */
+
 if(category==="accessories"){
 
 items.innerHTML=`
 
-<button class="item" onclick="setAccessory('🎒',this)">
+<button class="item"
+onclick="setAccessory('🎒',this)">
 🎒
+<br>
+<small>Backpack</small>
 </button>
 
-<button class="item" onclick="setAccessory('🎧',this)">
+<button class="item"
+onclick="setAccessory('🎧',this)">
 🎧
+<br>
+<small>Headphones</small>
 </button>
 
-<button class="item" onclick="setAccessory('🧢',this)">
+<button class="item"
+onclick="setAccessory('🧢',this)">
 🧢
+<br>
+<small>Cap</small>
 </button>
 
-<button class="item" onclick="setAccessory('👓',this)">
+<button class="item"
+onclick="setAccessory('👓',this)">
 👓
+<br>
+<small>Glasses</small>
 </button>
 
-<button class="item" onclick="setAccessory('⌚',this)">
+<button class="item"
+onclick="setAccessory('⌚',this)">
 ⌚
+<br>
+<small>Watch</small>
 </button>
 
-<button class="item" onclick="setAccessory('📚',this)">
+<button class="item"
+onclick="setAccessory('📚',this)">
 📚
+<br>
+<small>Books</small>
 </button>
 
 `;
@@ -1483,51 +1688,34 @@ const hair=document
 
 hair.className="hair";
 
+hair.style.height="";
+hair.style.borderRadius="";
+hair.style.boxShadow="";
+
 
 if(style==="long"){
-
-hair.classList.add("long");
-
+    hair.classList.add("long");
 }
 
 if(style==="short"){
-
-hair.style.height="55px";
-
-hair.style.borderRadius="60px 60px 25px 25px";
-
+    hair.classList.add("short");
 }
 
 if(style==="curly"){
-
-hair.style.borderRadius="45%";
-
-hair.style.height="90px";
-
+    hair.classList.add("curly");
 }
 
 if(style==="ponytail"){
-
-hair.style.borderRadius="70px 70px 30px 30px";
-
+    hair.classList.add("ponytail");
 }
 
 if(style==="bun"){
-
-hair.style.height="65px";
-
-hair.style.borderRadius="50%";
-
+    hair.classList.add("bun");
 }
 
 if(style==="wavy"){
-
-hair.style.borderRadius="45% 55% 35% 50%";
-
-hair.style.height="92px";
-
+    hair.classList.add("wavy");
 }
-
 
 selectItem(button);
 
@@ -1595,7 +1783,7 @@ selectItem(button);
 
 
 /* =========================
-COLORS
+COLOR
 ========================= */
 
 function changeColor(type,color){
@@ -1609,7 +1797,12 @@ document
 .getElementById("hair")
 .style.background=color;
 
+document
+.getElementById("hairColor")
+.value=color;
+
 }
+
 
 if(type==="shirt"){
 
@@ -1617,7 +1810,12 @@ document
 .getElementById("shirt")
 .style.background=color;
 
+document
+.getElementById("shirtColor")
+.value=color;
+
 }
+
 
 if(type==="pants"){
 
@@ -1629,7 +1827,12 @@ document
 .getElementById("pants2")
 .style.background=color;
 
+document
+.getElementById("pantsColor")
+.value=color;
+
 }
+
 
 if(type==="shoes"){
 
@@ -1641,13 +1844,17 @@ document
 .getElementById("shoe2")
 .style.background=color;
 
+document
+.getElementById("shoesColor")
+.value=color;
+
 }
 
 }
 
 
 /* =========================
-ACCESSORIES
+ACCESSORY
 ========================= */
 
 function setAccessory(item,button){
@@ -1667,7 +1874,7 @@ selectItem(button);
 
 
 /* =========================
-SELECT ITEM
+SELECT
 ========================= */
 
 function selectItem(button){
