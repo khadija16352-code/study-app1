@@ -1200,33 +1200,39 @@ if(category==="hair"){
 
 items.innerHTML=`
 
-<button class="item" onclick="hairStyle('long',this)">
-💇‍♀️
+<button class="item hair-option" onclick="hairStyle('long',this)">
+    <span class="preview-hair long-preview"></span>
+    <small>Long</small>
 </button>
 
-<button class="item" onclick="hairStyle('short',this)">
-✂️
+<button class="item hair-option" onclick="hairStyle('short',this)">
+    <span class="preview-hair short-preview"></span>
+    <small>Short</small>
 </button>
 
-<button class="item" onclick="hairStyle('curly',this)">
-🌀
+<button class="item hair-option" onclick="hairStyle('curly',this)">
+    <span class="preview-hair curly-preview"></span>
+    <small>Curly</small>
 </button>
 
-<button class="item" onclick="hairStyle('ponytail',this)">
-🎀
+<button class="item hair-option" onclick="hairStyle('ponytail',this)">
+    <span class="preview-hair ponytail-preview"></span>
+    <small>Ponytail</small>
 </button>
 
-<button class="item" onclick="hairStyle('bun',this)">
-👱‍♀️
+<button class="item hair-option" onclick="hairStyle('bun',this)">
+    <span class="preview-hair bun-preview"></span>
+    <small>Bun</small>
 </button>
 
-<button class="item" onclick="hairStyle('wavy',this)">
-〰️
+<button class="item hair-option" onclick="hairStyle('wavy',this)">
+    <span class="preview-hair wavy-preview"></span>
+    <small>Wavy</small>
 </button>
 
 `;
 
-}
+
 
 
 if(category==="face"){
