@@ -1,0 +1,601 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Study Quest</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+    transition: .5s;
+}
+
+/* =========================
+   BACKGROUND SCENES
+========================= */
+
+body.neutral {
+    background:
+        radial-gradient(circle at 20% 20%, #ffffff 0 8%, transparent 9%),
+        linear-gradient(135deg, #e8e9ff, #f8f8ff);
+}
+
+body.girl {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.8) 0 7%, transparent 8%),
+        radial-gradient(circle at 85% 30%, rgba(255,255,255,.7) 0 5%, transparent 6%),
+        linear-gradient(135deg, #ffd6ea, #e7d8ff);
+}
+
+body.boy {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.7) 0 6%, transparent 7%),
+        radial-gradient(circle at 85% 30%, rgba(255,255,255,.6) 0 5%, transparent 6%),
+        linear-gradient(135deg, #ccecff, #d9d8ff);
+}
+
+/* Decorative circles */
+
+.scene {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(1px);
+    opacity: .35;
+}
+
+.c1 {
+    width: 250px;
+    height: 250px;
+    background: white;
+    top: -80px;
+    left: -60px;
+}
+
+.c2 {
+    width: 300px;
+    height: 300px;
+    background: white;
+    bottom: -130px;
+    right: -80px;
+}
+
+.star {
+    position: absolute;
+    font-size: 28px;
+    opacity: .6;
+}
+
+.s1 {
+    top: 12%;
+    left: 12%;
+}
+
+.s2 {
+    top: 20%;
+    right: 15%;
+}
+
+.s3 {
+    bottom: 15%;
+    left: 18%;
+}
+
+/* =========================
+   LOGIN CARD
+========================= */
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 470px;
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(18px);
+    border-radius: 30px;
+    padding: 38px;
+    box-shadow: 0 25px 70px rgba(50,40,100,.15);
+}
+
+.logo {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 28px;
+}
+
+/* =========================
+   LANGUAGE
+========================= */
+
+.language-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.languages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.language {
+    padding: 13px;
+    border: 2px solid #eee;
+    border-radius: 13px;
+    background: white;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .2s;
+}
+
+.language.active {
+    border-color: #8b75ff;
+    background: #f4f1ff;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #eee;
+    border-radius: 13px;
+    outline: none;
+    font-size: 15px;
+    background: white;
+}
+
+input:focus,
+select:focus {
+    border-color: #8b75ff;
+}
+
+/* =========================
+   GENDER
+========================= */
+
+.gender-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.gender-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.gender {
+    padding: 16px;
+    border-radius: 15px;
+    border: 2px solid #eee;
+    background: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .2s;
+}
+
+.gender:hover {
+    transform: translateY(-2px);
+}
+
+.gender.selected.girl {
+    border-color: #ff72ae;
+    background: #fff0f7;
+}
+
+.gender.selected.boy {
+    border-color: #4d9cff;
+    background: #eef7ff;
+}
+
+/* =========================
+   CONTINUE
+========================= */
+
+.continue {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 15px;
+    background: #806cff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.continue:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(128,108,255,.25);
+}
+
+.note {
+    text-align: center;
+    color: #999;
+    font-size: 12px;
+    margin-top: 14px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:520px) {
+
+    .login-card {
+        padding: 27px 22px;
+    }
+
+    .logo {
+        font-size: 29px;
+    }
+}
+</style>
+</head>
+
+<body class="neutral">
+
+<div class="scene">
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+
+    <div class="star s1">✦</div>
+    <div class="star s2">✧</div>
+    <div class="star s3">✦</div>
+</div>
+
+<div class="container">
+
+    <div class="login-card">
+
+        <div class="logo">
+            📚 Study Quest
+        </div>
+
+        <div class="subtitle">
+            Start your study journey
+        </div>
+
+        <!-- LANGUAGE -->
+
+        <div class="language-title">
+            🌍 Language
+        </div>
+
+        <div class="languages">
+
+            <button
+                class="language active"
+                id="englishBtn"
+                onclick="setLanguage('en')">
+                🇬🇧 English
+            </button>
+
+            <button
+                class="language"
+                id="arabicBtn"
+                onclick="setLanguage('ar')">
+                🇪🇬 العربية
+            </button>
+
+        </div>
+
+        <!-- NAME -->
+
+        <div class="input-group">
+
+            <label id="nameLabel">
+                👤 Name
+            </label>
+
+            <input
+                id="name"
+                type="text"
+                placeholder="Enter your name">
+
+        </div>
+
+        <!-- AGE -->
+
+        <div class="input-group">
+
+            <label id="ageLabel">
+                🎂 Age
+            </label>
+
+            <input
+                id="age"
+                type="number"
+                min="5"
+                max="25"
+                placeholder="Enter your age">
+
+        </div>
+
+        <!-- SCHOOL YEAR -->
+
+        <div class="input-group">
+
+            <label id="schoolLabel">
+                🎓 School year
+            </label>
+
+            <select id="school">
+
+                <option value="">
+                    Select your school year
+                </option>
+
+                <option>Primary 1</option>
+                <option>Primary 2</option>
+                <option>Primary 3</option>
+                <option>Primary 4</option>
+                <option>Primary 5</option>
+                <option>Primary 6</option>
+
+                <option>Preparatory 1</option>
+                <option>Preparatory 2</option>
+                <option>Preparatory 3</option>
+
+                <option>Secondary 1</option>
+                <option>Secondary 2</option>
+                <option>Secondary 3</option>
+
+            </select>
+
+        </div>
+
+        <!-- GENDER -->
+
+        <div class="gender-title" id="genderTitle">
+            👤 Choose your character type
+        </div>
+
+        <div class="gender-buttons">
+
+            <button
+                class="gender"
+                id="girlBtn"
+                onclick="chooseGender('girl')">
+                👧 Girl
+            </button>
+
+            <button
+                class="gender"
+                id="boyBtn"
+                onclick="chooseGender('boy')">
+                👦 Boy
+            </button>
+
+        </div>
+
+        <button class="continue" onclick="continueApp()">
+            Continue →
+        </button>
+
+        <div class="note">
+            Your profile will be saved on this device.
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+let language = "en";
+let gender = "";
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+function setLanguage(lang) {
+
+    language = lang;
+
+    document.getElementById("englishBtn")
+        .classList.toggle("active", lang === "en");
+
+    document.getElementById("arabicBtn")
+        .classList.toggle("active", lang === "ar");
+
+    if (lang === "ar") {
+
+        document.documentElement.lang = "ar";
+        document.documentElement.dir = "rtl";
+
+        document.querySelector(".subtitle").textContent =
+            "ابدأ رحلتك الدراسية";
+
+        document.querySelector(".language-title").textContent =
+            "🌍 اللغة";
+
+        document.getElementById("nameLabel").textContent =
+            "👤 الاسم";
+
+        document.getElementById("ageLabel").textContent =
+            "🎂 السن";
+
+        document.getElementById("schoolLabel").textContent =
+            "🎓 السنة الدراسية";
+
+        document.getElementById("genderTitle").textContent =
+            "👤 اختار نوع شخصيتك";
+
+        document.getElementById("name").placeholder =
+            "اكتب اسمك";
+
+        document.getElementById("age").placeholder =
+            "اكتب سنك";
+
+        document.querySelector(".continue").textContent =
+            "متابعة ←";
+
+        document.querySelector(".note").textContent =
+            "بياناتك هتتحفظ على الجهاز ده.";
+
+    } else {
+
+        document.documentElement.lang = "en";
+        document.documentElement.dir = "ltr";
+
+        document.querySelector(".subtitle").textContent =
+            "Start your study journey";
+
+        document.querySelector(".language-title").textContent =
+            "🌍 Language";
+
+        document.getElementById("nameLabel").textContent =
+            "👤 Name";
+
+        document.getElementById("ageLabel").textContent =
+            "🎂 Age";
+
+        document.getElementById("schoolLabel").textContent =
+            "🎓 School year";
+
+        document.getElementById("genderTitle").textContent =
+            "👤 Choose your character type";
+
+        document.getElementById("name").placeholder =
+            "Enter your name";
+
+        document.getElementById("age").placeholder =
+            "Enter your age";
+
+        document.querySelector(".continue").textContent =
+            "Continue →";
+
+        document.querySelector(".note").textContent =
+            "Your profile will be saved on this device.";
+    }
+}
+
+
+/* =========================
+   GENDER
+========================= */
+
+function chooseGender(type) {
+
+    gender = type;
+
+    document.getElementById("girlBtn")
+        .classList.remove("selected");
+
+    document.getElementById("boyBtn")
+        .classList.remove("selected");
+
+    if (type === "girl") {
+
+        document.getElementById("girlBtn")
+            .classList.add("selected", "girl");
+
+        document.body.className = "girl";
+
+    } else {
+
+        document.getElementById("boyBtn")
+            .classList.add("selected", "boy");
+
+        document.body.className = "boy";
+    }
+}
+
+
+/* =========================
+   CONTINUE
+========================= */
+
+function continueApp() {
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const age =
+        document.getElementById("age").value;
+
+    const school =
+        document.getElementById("school").value;
+
+    if (!name || !age || !school || !gender) {
+
+        alert(
+            language === "ar"
+            ? "من فضلك كمّل كل البيانات ❤️"
+            : "Please complete all the information ❤️"
+        );
+
+        return;
+    }
+
+    localStorage.setItem("studyQuestName", name);
+    localStorage.setItem("studyQuestAge", age);
+    localStorage.setItem("studyQuestSchool", school);
+    localStorage.setItem("studyQuestGender", gender);
+    localStorage.setItem("studyQuestLanguage", language);
+
+    alert(
+        language === "ar"
+        ? "تم إنشاء البروفايل بنجاح 🎉"
+        : "Profile created successfully 🎉"
+    );
+}
+
+</script>
+
+</body>
+</html>
