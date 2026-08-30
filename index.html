@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Study Quest</title>
 
 <style>
@@ -17,88 +17,27 @@ body {
     font-family: Arial, sans-serif;
     min-height: 100vh;
     overflow: hidden;
-    transition: .5s;
+    transition: .4s;
 }
 
 /* =========================
-   BACKGROUND SCENES
+   LOGIN BACKGROUND
 ========================= */
 
 body.neutral {
-    background:
-        radial-gradient(circle at 20% 20%, #ffffff 0 8%, transparent 9%),
-        linear-gradient(135deg, #e8e9ff, #f8f8ff);
+    background: linear-gradient(135deg, #e8e9ff, #f8f8ff);
 }
 
 body.girl {
-    background:
-        radial-gradient(circle at 15% 20%, rgba(255,255,255,.8) 0 7%, transparent 8%),
-        radial-gradient(circle at 85% 30%, rgba(255,255,255,.7) 0 5%, transparent 6%),
-        linear-gradient(135deg, #ffd6ea, #e7d8ff);
+    background: linear-gradient(135deg, #ffd6ea, #e7d8ff);
 }
 
 body.boy {
-    background:
-        radial-gradient(circle at 15% 20%, rgba(255,255,255,.7) 0 6%, transparent 7%),
-        radial-gradient(circle at 85% 30%, rgba(255,255,255,.6) 0 5%, transparent 6%),
-        linear-gradient(135deg, #ccecff, #d9d8ff);
-}
-
-/* Decorative circles */
-
-.scene {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.circle {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(1px);
-    opacity: .35;
-}
-
-.c1 {
-    width: 250px;
-    height: 250px;
-    background: white;
-    top: -80px;
-    left: -60px;
-}
-
-.c2 {
-    width: 300px;
-    height: 300px;
-    background: white;
-    bottom: -130px;
-    right: -80px;
-}
-
-.star {
-    position: absolute;
-    font-size: 28px;
-    opacity: .6;
-}
-
-.s1 {
-    top: 12%;
-    left: 12%;
-}
-
-.s2 {
-    top: 20%;
-    right: 15%;
-}
-
-.s3 {
-    bottom: 15%;
-    left: 18%;
+    background: linear-gradient(135deg, #ccecff, #d9d8ff);
 }
 
 /* =========================
-   LOGIN CARD
+   LOGIN
 ========================= */
 
 .container {
@@ -107,14 +46,12 @@ body.boy {
     align-items: center;
     justify-content: center;
     padding: 25px;
-    position: relative;
-    z-index: 2;
 }
 
 .login-card {
     width: 100%;
     max-width: 470px;
-    background: rgba(255,255,255,.88);
+    background: rgba(255,255,255,.9);
     backdrop-filter: blur(18px);
     border-radius: 30px;
     padding: 38px;
@@ -134,27 +71,32 @@ body.boy {
     margin-bottom: 28px;
 }
 
-/* =========================
-   LANGUAGE
-========================= */
-
-.language-title {
+.language-title,
+.gender-title {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.languages {
+.languages,
+.gender-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-bottom: 22px;
 }
 
-.language {
-    padding: 13px;
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+.language,
+.gender {
+    padding: 14px;
     border: 2px solid #eee;
-    border-radius: 13px;
+    border-radius: 14px;
     background: white;
     cursor: pointer;
     font-size: 15px;
@@ -162,23 +104,19 @@ body.boy {
 }
 
 .language.active {
-    border-color: #8b75ff;
+    border-color: #806cff;
     background: #f4f1ff;
 }
 
-/* =========================
-   INPUTS
-========================= */
+.input-group {
+    margin-bottom: 18px;
+}
 
 label {
     display: block;
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 8px;
-}
-
-.input-group {
-    margin-bottom: 18px;
 }
 
 input,
@@ -192,42 +130,6 @@ select {
     background: white;
 }
 
-input:focus,
-select:focus {
-    border-color: #8b75ff;
-}
-
-/* =========================
-   GENDER
-========================= */
-
-.gender-title {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.gender-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 25px;
-}
-
-.gender {
-    padding: 16px;
-    border-radius: 15px;
-    border: 2px solid #eee;
-    background: white;
-    cursor: pointer;
-    font-size: 16px;
-    transition: .2s;
-}
-
-.gender:hover {
-    transform: translateY(-2px);
-}
-
 .gender.selected.girl {
     border-color: #ff72ae;
     background: #fff0f7;
@@ -237,10 +139,6 @@ select:focus {
     border-color: #4d9cff;
     background: #eef7ff;
 }
-
-/* =========================
-   CONTINUE
-========================= */
 
 .continue {
     width: 100%;
@@ -252,183 +150,470 @@ select:focus {
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: .2s;
-}
-
-.continue:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(128,108,255,.25);
-}
-
-.note {
-    text-align: center;
-    color: #999;
-    font-size: 12px;
-    margin-top: 14px;
 }
 
 /* =========================
-   MOBILE
+   CUSTOMIZE SCREEN
 ========================= */
 
-@media(max-width:520px) {
+#customizeScreen {
+    display: none;
+    min-height: 100vh;
+    padding: 30px;
+}
 
-    .login-card {
-        padding: 27px 22px;
+.customize {
+    max-width: 1100px;
+    height: calc(100vh - 60px);
+    margin: auto;
+
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(20px);
+
+    border-radius: 35px;
+    box-shadow: 0 25px 80px rgba(50,40,100,.15);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+}
+
+/* CHARACTER */
+
+.character-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.character-title {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.character {
+    width: 270px;
+    height: 400px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0);
     }
 
-    .logo {
-        font-size: 29px;
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* TEMP GAME CHARACTER */
+
+.head {
+    width: 115px;
+    height: 125px;
+    border-radius: 48% 48% 45% 45%;
+    background: #f3c7a5;
+    position: relative;
+    z-index: 3;
+}
+
+.hair {
+    position: absolute;
+    top: -18px;
+    left: -8px;
+
+    width: 130px;
+    height: 70px;
+
+    border-radius: 65px 65px 30px 30px;
+    background: #4b3428;
+
+    z-index: 4;
+}
+
+.eye {
+    position: absolute;
+    width: 10px;
+    height: 14px;
+    border-radius: 50%;
+    background: #222;
+    top: 58px;
+}
+
+.eye.left {
+    left: 30px;
+}
+
+.eye.right {
+    right: 30px;
+}
+
+.smile {
+    position: absolute;
+    width: 28px;
+    height: 12px;
+    border-bottom: 3px solid #222;
+    border-radius: 50%;
+    left: 44px;
+    top: 82px;
+}
+
+.body {
+    width: 150px;
+    height: 155px;
+    background: #806cff;
+    border-radius: 35px 35px 20px 20px;
+    margin-top: -5px;
+    z-index: 2;
+}
+
+.leg {
+    width: 45px;
+    height: 105px;
+    background: #30354d;
+    border-radius: 0 0 18px 18px;
+}
+
+.legs {
+    display: flex;
+    gap: 20px;
+}
+
+.shoe {
+    width: 65px;
+    height: 28px;
+    background: white;
+    border-radius: 20px;
+    margin-top: -3px;
+}
+
+/* OPTIONS */
+
+.options-area {
+    padding: 45px;
+    overflow-y: auto;
+}
+
+.options-area h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.options-area p {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.categories {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.category {
+    border: none;
+    background: #f2f2f7;
+    padding: 11px 16px;
+    border-radius: 13px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.category.active {
+    background: #806cff;
+    color: white;
+}
+
+.items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.item {
+    min-height: 90px;
+    border: 2px solid #eee;
+    border-radius: 18px;
+    background: white;
+    cursor: pointer;
+    font-size: 30px;
+    transition: .2s;
+}
+
+.item:hover {
+    transform: translateY(-3px);
+}
+
+.save-character {
+    width: 100%;
+    border: none;
+    margin-top: 25px;
+    padding: 16px;
+    border-radius: 16px;
+    background: #806cff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:800px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .customize {
+        height: auto;
+        grid-template-columns: 1fr;
+    }
+
+    #customizeScreen {
+        padding: 15px;
+    }
+
+    .options-area {
+        padding: 25px;
     }
 }
 </style>
+
 </head>
 
 <body class="neutral">
 
-<div class="scene">
-    <div class="circle c1"></div>
-    <div class="circle c2"></div>
+<!-- =========================
+     LOGIN SCREEN
+========================= -->
 
-    <div class="star s1">✦</div>
-    <div class="star s2">✧</div>
-    <div class="star s3">✦</div>
-</div>
+<div id="loginScreen">
 
 <div class="container">
 
-    <div class="login-card">
+<div class="login-card">
 
-        <div class="logo">
-            📚 Study Quest
-        </div>
+<div class="logo">
+📚 Study Quest
+</div>
 
-        <div class="subtitle">
-            Start your study journey
-        </div>
+<div class="subtitle">
+Start your study journey
+</div>
 
-        <!-- LANGUAGE -->
+<div class="language-title">
+🌍 Language
+</div>
 
-        <div class="language-title">
-            🌍 Language
-        </div>
+<div class="languages">
 
-        <div class="languages">
+<button class="language active"
+id="englishBtn"
+onclick="setLanguage('en')">
+🇬🇧 English </button>
 
-            <button
-                class="language active"
-                id="englishBtn"
-                onclick="setLanguage('en')">
-                🇬🇧 English
-            </button>
+<button class="language"
+id="arabicBtn"
+onclick="setLanguage('ar')">
+🇪🇬 العربية </button>
 
-            <button
-                class="language"
-                id="arabicBtn"
-                onclick="setLanguage('ar')">
-                🇪🇬 العربية
-            </button>
+</div>
 
-        </div>
+<div class="input-group">
 
-        <!-- NAME -->
+<label id="nameLabel">
+👤 Name
+</label>
 
-        <div class="input-group">
+<input
+id="name"
+type="text"
+placeholder="Enter your name">
 
-            <label id="nameLabel">
-                👤 Name
-            </label>
+</div>
 
-            <input
-                id="name"
-                type="text"
-                placeholder="Enter your name">
+<div class="input-group">
 
-        </div>
+<label id="ageLabel">
+🎂 Age
+</label>
 
-        <!-- AGE -->
+<input
+id="age"
+type="number"
+min="5"
+max="25"
+placeholder="Enter your age">
 
-        <div class="input-group">
+</div>
 
-            <label id="ageLabel">
-                🎂 Age
-            </label>
+<div class="input-group">
 
-            <input
-                id="age"
-                type="number"
-                min="5"
-                max="25"
-                placeholder="Enter your age">
+<label id="schoolLabel">
+🎓 School year
+</label>
 
-        </div>
+<select id="school">
 
-        <!-- SCHOOL YEAR -->
+<option value="">
+Select your school year
+</option>
 
-        <div class="input-group">
+<option>Primary 1</option>
+<option>Primary 2</option>
+<option>Primary 3</option>
+<option>Primary 4</option>
+<option>Primary 5</option>
+<option>Primary 6</option>
 
-            <label id="schoolLabel">
-                🎓 School year
-            </label>
+<option>Preparatory 1</option>
+<option>Preparatory 2</option>
+<option>Preparatory 3</option>
 
-            <select id="school">
+<option>Secondary 1</option>
+<option>Secondary 2</option>
+<option>Secondary 3</option>
 
-                <option value="">
-                    Select your school year
-                </option>
+</select>
 
-                <option>Primary 1</option>
-                <option>Primary 2</option>
-                <option>Primary 3</option>
-                <option>Primary 4</option>
-                <option>Primary 5</option>
-                <option>Primary 6</option>
+</div>
 
-                <option>Preparatory 1</option>
-                <option>Preparatory 2</option>
-                <option>Preparatory 3</option>
+<div class="gender-title" id="genderTitle">
+👤 Choose your character type
+</div>
 
-                <option>Secondary 1</option>
-                <option>Secondary 2</option>
-                <option>Secondary 3</option>
+<div class="gender-buttons">
 
-            </select>
+<button
+class="gender"
+id="girlBtn"
+onclick="chooseGender('girl')">
+👧 Girl </button>
 
-        </div>
+<button
+class="gender"
+id="boyBtn"
+onclick="chooseGender('boy')">
+👦 Boy </button>
 
-        <!-- GENDER -->
+</div>
 
-        <div class="gender-title" id="genderTitle">
-            👤 Choose your character type
-        </div>
+<button class="continue" onclick="continueApp()">
+Continue →
+</button>
 
-        <div class="gender-buttons">
+</div>
+</div>
+</div>
 
-            <button
-                class="gender"
-                id="girlBtn"
-                onclick="chooseGender('girl')">
-                👧 Girl
-            </button>
+<!-- =========================
+     CUSTOMIZE SCREEN
+========================= -->
 
-            <button
-                class="gender"
-                id="boyBtn"
-                onclick="chooseGender('boy')">
-                👦 Boy
-            </button>
+<div id="customizeScreen">
 
-        </div>
+<div class="customize">
 
-        <button class="continue" onclick="continueApp()">
-            Continue →
-        </button>
+<!-- CHARACTER -->
 
-        <div class="note">
-            Your profile will be saved on this device.
-        </div>
+<div class="character-area">
 
-    </div>
+<div class="character-title">
+✨ Your Character
+</div>
+
+<div class="character">
+
+<div class="head">
+
+<div class="hair" id="hair"></div>
+
+<div class="eye left"></div>
+<div class="eye right"></div>
+
+<div class="smile"></div>
+
+</div>
+
+<div class="body" id="shirt"></div>
+
+<div class="legs">
+
+<div class="leg" id="pants1"></div>
+<div class="leg" id="pants2"></div>
+
+</div>
+
+<div class="legs">
+
+<div class="shoe" id="shoe1"></div>
+<div class="shoe" id="shoe2"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- OPTIONS -->
+
+<div class="options-area">
+
+<h1>
+Customize Character
+</h1>
+
+<p>
+Create a character that feels like you.
+</p>
+
+<div class="categories">
+
+<button
+class="category active"
+onclick="showCategory('hair')">
+💇 Hair </button>
+
+<button
+class="category"
+onclick="showCategory('clothes')">
+👕 Clothes </button>
+
+<button
+class="category"
+onclick="showCategory('pants')">
+👖 Pants </button>
+
+<button
+class="category"
+onclick="showCategory('shoes')">
+👟 Shoes </button>
+
+</div>
+
+<div class="items" id="items"></div>
+
+<button class="save-character"
+onclick="saveCharacter()">
+Save Character ✨ </button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -436,164 +621,253 @@ select:focus {
 
 let language = "en";
 let gender = "";
+let currentCategory = "hair";
 
 
-/* =========================
-   LANGUAGE
-========================= */
+/* LANGUAGE */
 
 function setLanguage(lang) {
 
-    language = lang;
+language = lang;
 
-    document.getElementById("englishBtn")
-        .classList.toggle("active", lang === "en");
+document.getElementById("englishBtn")
+.classList.toggle("active", lang === "en");
 
-    document.getElementById("arabicBtn")
-        .classList.toggle("active", lang === "ar");
+document.getElementById("arabicBtn")
+.classList.toggle("active", lang === "ar");
 
-    if (lang === "ar") {
+if(lang === "ar") {
 
-        document.documentElement.lang = "ar";
-        document.documentElement.dir = "rtl";
+document.documentElement.lang = "ar";
+document.documentElement.dir = "rtl";
 
-        document.querySelector(".subtitle").textContent =
-            "ابدأ رحلتك الدراسية";
+document.querySelector(".subtitle").textContent =
+"ابدأ رحلتك الدراسية";
 
-        document.querySelector(".language-title").textContent =
-            "🌍 اللغة";
+document.querySelector(".language-title").textContent =
+"🌍 اللغة";
 
-        document.getElementById("nameLabel").textContent =
-            "👤 الاسم";
+document.getElementById("nameLabel").textContent =
+"👤 الاسم";
 
-        document.getElementById("ageLabel").textContent =
-            "🎂 السن";
+document.getElementById("ageLabel").textContent =
+"🎂 السن";
 
-        document.getElementById("schoolLabel").textContent =
-            "🎓 السنة الدراسية";
+document.getElementById("schoolLabel").textContent =
+"🎓 السنة الدراسية";
 
-        document.getElementById("genderTitle").textContent =
-            "👤 اختار نوع شخصيتك";
+document.getElementById("genderTitle").textContent =
+"👤 اختار نوع شخصيتك";
 
-        document.getElementById("name").placeholder =
-            "اكتب اسمك";
+document.getElementById("name").placeholder =
+"اكتب اسمك";
 
-        document.getElementById("age").placeholder =
-            "اكتب سنك";
+document.getElementById("age").placeholder =
+"اكتب سنك";
 
-        document.querySelector(".continue").textContent =
-            "متابعة ←";
+document.querySelector(".continue").textContent =
+"متابعة ←";
 
-        document.querySelector(".note").textContent =
-            "بياناتك هتتحفظ على الجهاز ده.";
+} else {
 
-    } else {
+document.documentElement.lang = "en";
+document.documentElement.dir = "ltr";
 
-        document.documentElement.lang = "en";
-        document.documentElement.dir = "ltr";
+document.querySelector(".subtitle").textContent =
+"Start your study journey";
 
-        document.querySelector(".subtitle").textContent =
-            "Start your study journey";
+document.querySelector(".language-title").textContent =
+"🌍 Language";
 
-        document.querySelector(".language-title").textContent =
-            "🌍 Language";
+document.getElementById("nameLabel").textContent =
+"👤 Name";
 
-        document.getElementById("nameLabel").textContent =
-            "👤 Name";
+document.getElementById("ageLabel").textContent =
+"🎂 Age";
 
-        document.getElementById("ageLabel").textContent =
-            "🎂 Age";
+document.getElementById("schoolLabel").textContent =
+"🎓 School year";
 
-        document.getElementById("schoolLabel").textContent =
-            "🎓 School year";
+document.getElementById("genderTitle").textContent =
+"👤 Choose your character type";
 
-        document.getElementById("genderTitle").textContent =
-            "👤 Choose your character type";
+document.getElementById("name").placeholder =
+"Enter your name";
 
-        document.getElementById("name").placeholder =
-            "Enter your name";
+document.getElementById("age").placeholder =
+"Enter your age";
 
-        document.getElementById("age").placeholder =
-            "Enter your age";
-
-        document.querySelector(".continue").textContent =
-            "Continue →";
-
-        document.querySelector(".note").textContent =
-            "Your profile will be saved on this device.";
-    }
+document.querySelector(".continue").textContent =
+"Continue →";
+}
 }
 
 
-/* =========================
-   GENDER
-========================= */
+/* GENDER */
 
 function chooseGender(type) {
 
-    gender = type;
+gender = type;
 
-    document.getElementById("girlBtn")
-        .classList.remove("selected");
+document.getElementById("girlBtn")
+.classList.remove("selected");
 
-    document.getElementById("boyBtn")
-        .classList.remove("selected");
+document.getElementById("boyBtn")
+.classList.remove("selected");
 
-    if (type === "girl") {
+if(type === "girl") {
 
-        document.getElementById("girlBtn")
-            .classList.add("selected", "girl");
+document.getElementById("girlBtn")
+.classList.add("selected","girl");
 
-        document.body.className = "girl";
+document.body.className = "girl";
 
-    } else {
+} else {
 
-        document.getElementById("boyBtn")
-            .classList.add("selected", "boy");
+document.getElementById("boyBtn")
+.classList.add("selected","boy");
 
-        document.body.className = "boy";
-    }
+document.body.className = "boy";
+}
 }
 
 
-/* =========================
-   CONTINUE
-========================= */
+/* CONTINUE */
 
 function continueApp() {
 
-    const name =
-        document.getElementById("name").value.trim();
+const name =
+document.getElementById("name").value.trim();
 
-    const age =
-        document.getElementById("age").value;
+const age =
+document.getElementById("age").value;
 
-    const school =
-        document.getElementById("school").value;
+const school =
+document.getElementById("school").value;
 
-    if (!name || !age || !school || !gender) {
+if(!name || !age || !school || !gender) {
 
-        alert(
-            language === "ar"
-            ? "من فضلك كمّل كل البيانات ❤️"
-            : "Please complete all the information ❤️"
-        );
+alert(
+language === "ar"
+? "من فضلك كمّل كل البيانات ❤️"
+: "Please complete all the information ❤️"
+);
 
-        return;
-    }
-
-    localStorage.setItem("studyQuestName", name);
-    localStorage.setItem("studyQuestAge", age);
-    localStorage.setItem("studyQuestSchool", school);
-    localStorage.setItem("studyQuestGender", gender);
-    localStorage.setItem("studyQuestLanguage", language);
-
-    alert(
-        language === "ar"
-        ? "تم إنشاء البروفايل بنجاح 🎉"
-        : "Profile created successfully 🎉"
-    );
+return;
 }
+
+localStorage.setItem("studyQuestName",name);
+localStorage.setItem("studyQuestAge",age);
+localStorage.setItem("studyQuestSchool",school);
+localStorage.setItem("studyQuestGender",gender);
+localStorage.setItem("studyQuestLanguage",language);
+
+document.getElementById("loginScreen").style.display = "none";
+document.getElementById("customizeScreen").style.display = "block";
+
+}
+
+
+/* CATEGORY */
+
+function showCategory(category) {
+
+currentCategory = category;
+
+document.querySelectorAll(".category")
+.forEach(button => button.classList.remove("active"));
+
+event.target.classList.add("active");
+
+const items = document.getElementById("items");
+
+items.innerHTML = "";
+
+if(category === "hair") {
+
+items.innerHTML = `
+<button class="item" onclick="changeHair('#4b3428')">🤎</button>
+<button class="item" onclick="changeHair('#222')">🖤</button>
+<button class="item" onclick="changeHair('#d49b52')">💛</button>
+`;
+
+}
+
+if(category === "clothes") {
+
+items.innerHTML = `
+<button class="item" onclick="changeShirt('#806cff')">💜</button>
+<button class="item" onclick="changeShirt('#ff72ae')">🩷</button>
+<button class="item" onclick="changeShirt('#4d9cff')">💙</button>
+`;
+
+}
+
+if(category === "pants") {
+
+items.innerHTML = `
+<button class="item" onclick="changePants('#30354d')">🖤</button>
+<button class="item" onclick="changePants('#496c9e')">💙</button>
+<button class="item" onclick="changePants('#754c36')">🤎</button>
+`;
+
+}
+
+if(category === "shoes") {
+
+items.innerHTML = `
+<button class="item" onclick="changeShoes('white')">🤍</button>
+<button class="item" onclick="changeShoes('#222')">🖤</button>
+<button class="item" onclick="changeShoes('#ff72ae')">🩷</button>
+`;
+}
+
+}
+
+
+/* CHANGES */
+
+function changeHair(color) {
+document.getElementById("hair").style.background = color;
+}
+
+function changeShirt(color) {
+document.getElementById("shirt").style.background = color;
+}
+
+function changePants(color) {
+
+document.getElementById("pants1").style.background = color;
+document.getElementById("pants2").style.background = color;
+
+}
+
+function changeShoes(color) {
+
+document.getElementById("shoe1").style.background = color;
+document.getElementById("shoe2").style.background = color;
+
+}
+
+
+/* SAVE */
+
+function saveCharacter() {
+
+localStorage.setItem(
+"studyQuestCharacterSaved",
+"true"
+);
+
+alert(
+language === "ar"
+? "تم حفظ شخصيتك ✨"
+: "Your character has been saved ✨"
+);
+
+}
+
+showCategory("hair");
 
 </script>
 
