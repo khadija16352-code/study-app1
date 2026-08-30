@@ -4,752 +4,566 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Study Quest</title>
 
 <style>
-
-/* =========================
-   BASIC
-========================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
-    transition: .4s;
-    overflow: hidden;
+body{
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+    transition:.4s;
+    overflow-x:hidden;
 }
 
-/* =========================
-   BACKGROUNDS
-========================= */
-
-body.neutral {
-    background:
-        radial-gradient(circle at 15% 20%, white 0 5%, transparent 6%),
-        linear-gradient(135deg, #e8e9ff, #f8f8ff);
+body.neutral{
+    background:linear-gradient(135deg,#eef0ff,#fafaff);
 }
 
-body.girl {
-    background:
-        radial-gradient(circle at 15% 20%, rgba(255,255,255,.8) 0 6%, transparent 7%),
-        radial-gradient(circle at 85% 25%, rgba(255,255,255,.7) 0 5%, transparent 6%),
-        linear-gradient(135deg, #ffd6ea, #e7d8ff);
+body.girl{
+    background:linear-gradient(135deg,#ffd9eb,#e9ddff);
 }
 
-body.boy {
-    background:
-        radial-gradient(circle at 15% 20%, rgba(255,255,255,.7) 0 6%, transparent 7%),
-        radial-gradient(circle at 85% 25%, rgba(255,255,255,.6) 0 5%, transparent 6%),
-        linear-gradient(135deg, #ccecff, #d9d8ff);
+body.boy{
+    background:linear-gradient(135deg,#d2efff,#dddfff);
+}
+
+button{
+    font-family:inherit;
 }
 
 /* =========================
-   LOGIN
+LOGIN
 ========================= */
 
-#loginScreen {
-    min-height: 100vh;
+#loginScreen{
+    min-height:100vh;
 }
 
-.container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 25px;
+.container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px;
 }
 
-.login-card {
-    width: 100%;
-    max-width: 470px;
-
-    background: rgba(255,255,255,.9);
-    backdrop-filter: blur(18px);
-
-    border-radius: 30px;
-    padding: 38px;
-
-    box-shadow:
-        0 25px 70px rgba(50,40,100,.15);
+.login-card{
+    width:100%;
+    max-width:470px;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(18px);
+    border-radius:30px;
+    padding:38px;
+    box-shadow:0 25px 70px rgba(50,40,100,.15);
 }
 
-.logo {
-    text-align: center;
-    font-size: 34px;
-    font-weight: 800;
-    margin-bottom: 8px;
+.logo{
+    text-align:center;
+    font-size:34px;
+    font-weight:800;
+    margin-bottom:8px;
 }
 
-.subtitle {
-    text-align: center;
-    color: #777;
-    margin-bottom: 28px;
+.subtitle{
+    text-align:center;
+    color:#777;
+    margin-bottom:28px;
 }
 
-/* =========================
-   LANGUAGE
-========================= */
-
-.language-title {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 10px;
+.language-title,
+.gender-title{
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:10px;
 }
 
-.languages {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 22px;
+.languages,
+.gender-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
 }
 
-.language {
-    padding: 13px;
-
-    border: 2px solid #eee;
-    border-radius: 13px;
-
-    background: white;
-
-    cursor: pointer;
-    font-size: 15px;
-
-    transition: .2s;
+.languages{
+    margin-bottom:22px;
 }
 
-.language:hover {
-    transform: translateY(-2px);
+.language,
+.gender{
+    padding:14px;
+    border:2px solid #eee;
+    border-radius:14px;
+    background:white;
+    cursor:pointer;
+    transition:.2s;
 }
 
-.language.active {
-    border-color: #806cff;
-    background: #f4f1ff;
+.language.active{
+    border-color:#806cff;
+    background:#f4f1ff;
 }
 
-/* =========================
-   INPUTS
-========================= */
-
-.input-group {
-    margin-bottom: 18px;
+.input-group{
+    margin-bottom:18px;
 }
 
-label {
-    display: block;
-
-    font-size: 14px;
-    font-weight: bold;
-
-    margin-bottom: 8px;
+label{
+    display:block;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:8px;
 }
 
 input,
-select {
-
-    width: 100%;
-
-    padding: 14px;
-
-    border: 2px solid #eee;
-    border-radius: 13px;
-
-    outline: none;
-
-    font-size: 15px;
-
-    background: white;
-
+select{
+    width:100%;
+    padding:14px;
+    border:2px solid #eee;
+    border-radius:13px;
+    outline:none;
+    font-size:15px;
+    background:white;
 }
 
 input:focus,
-select:focus {
-    border-color: #806cff;
+select:focus{
+    border-color:#806cff;
+}
+
+.gender-buttons{
+    margin-bottom:25px;
+}
+
+.gender.selected.girl{
+    border-color:#ff72ae;
+    background:#fff0f7;
+}
+
+.gender.selected.boy{
+    border-color:#4d9cff;
+    background:#eef7ff;
+}
+
+.continue{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:15px;
+    background:#806cff;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
 /* =========================
-   GENDER
+CUSTOMIZE
 ========================= */
 
-.gender-title {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 10px;
+#customizeScreen{
+    display:none;
+    min-height:100vh;
+    padding:25px;
 }
 
-.gender-buttons {
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 12px;
-
-    margin-bottom: 25px;
-}
-
-.gender {
-
-    padding: 16px;
-
-    border-radius: 15px;
-
-    border: 2px solid #eee;
-
-    background: white;
-
-    cursor: pointer;
-
-    font-size: 16px;
-
-    transition: .2s;
-}
-
-.gender:hover {
-    transform: translateY(-2px);
-}
-
-.gender.selected.girl {
-
-    border-color: #ff72ae;
-
-    background: #fff0f7;
-}
-
-.gender.selected.boy {
-
-    border-color: #4d9cff;
-
-    background: #eef7ff;
+.customize{
+    max-width:1200px;
+    min-height:calc(100vh - 50px);
+    margin:auto;
+    display:grid;
+    grid-template-columns:45% 55%;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(20px);
+    border-radius:32px;
+    overflow:hidden;
+    box-shadow:0 25px 80px rgba(50,40,100,.15);
 }
 
 /* =========================
-   CONTINUE
+CHARACTER AREA
 ========================= */
 
-.continue {
-
-    width: 100%;
-
-    padding: 16px;
-
-    border: none;
-
-    border-radius: 15px;
-
-    background: #806cff;
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: .2s;
+.character-area{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
 }
 
-.continue:hover {
+.character-title{
+    font-size:28px;
+    font-weight:800;
+    margin-bottom:20px;
+}
 
-    transform: translateY(-2px);
+.character{
+    width:300px;
+    height:450px;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
 
-    box-shadow:
-        0 8px 20px rgba(128,108,255,.25);
+/* floor */
+
+.floor{
+    position:absolute;
+    bottom:35px;
+    width:190px;
+    height:30px;
+    border-radius:50%;
+    background:rgba(80,70,130,.12);
+}
+
+/* head */
+
+.head{
+    position:relative;
+    width:125px;
+    height:135px;
+    background:#f1c6a5;
+    border-radius:48% 48% 45% 45%;
+    z-index:5;
+}
+
+/* hair */
+
+.hair{
+    position:absolute;
+    top:-22px;
+    left:-8px;
+    width:141px;
+    height:85px;
+    background:#4b3428;
+    border-radius:70px 70px 35px 35px;
+    z-index:7;
+    transition:.3s;
+}
+
+.hair.long::before,
+.hair.long::after{
+    content:"";
+    position:absolute;
+    top:35px;
+    width:32px;
+    height:105px;
+    background:inherit;
+    border-radius:20px;
+}
+
+.hair.long::before{
+    left:0;
+}
+
+.hair.long::after{
+    right:0;
+}
+
+/* eyes */
+
+.eye{
+    position:absolute;
+    top:61px;
+    width:12px;
+    height:16px;
+    background:#222;
+    border-radius:50%;
+    z-index:8;
+}
+
+.eye::after{
+    content:"";
+    position:absolute;
+    width:4px;
+    height:5px;
+    background:white;
+    border-radius:50%;
+    top:2px;
+    left:2px;
+}
+
+.eye.left{
+    left:30px;
+}
+
+.eye.right{
+    right:30px;
+}
+
+/* smile */
+
+.smile{
+    position:absolute;
+    top:91px;
+    left:47px;
+    width:31px;
+    height:13px;
+    border-bottom:3px solid #333;
+    border-radius:50%;
+    z-index:8;
+}
+
+/* body */
+
+.avatar-body{
+    position:relative;
+    width:155px;
+    height:145px;
+    background:#806cff;
+    border-radius:35px 35px 22px 22px;
+    z-index:3;
+    margin-top:-2px;
+    transition:.3s;
+}
+
+/* arms */
+
+.avatar-body::before,
+.avatar-body::after{
+    content:"";
+    position:absolute;
+    width:35px;
+    height:105px;
+    top:20px;
+    background:inherit;
+    border-radius:20px;
+}
+
+.avatar-body::before{
+    left:-25px;
+    transform:rotate(8deg);
+}
+
+.avatar-body::after{
+    right:-25px;
+    transform:rotate(-8deg);
+}
+
+/* legs */
+
+.legs{
+    display:flex;
+    gap:17px;
+    z-index:2;
+}
+
+.leg{
+    width:48px;
+    height:100px;
+    background:#35405c;
+    border-radius:0 0 18px 18px;
+    transition:.3s;
+}
+
+/* shoes */
+
+.shoes{
+    display:flex;
+    gap:8px;
+    margin-top:-4px;
+    z-index:4;
+}
+
+.shoe{
+    width:70px;
+    height:30px;
+    background:white;
+    border-radius:20px;
+    transition:.3s;
+}
+
+/* accessory */
+
+.accessory{
+    position:absolute;
+    z-index:10;
+    font-size:42px;
+    top:115px;
+    right:45px;
+    display:none;
 }
 
 /* =========================
-   CUSTOMIZE SCREEN
+EDIT COLOR BUTTON
 ========================= */
 
-#customizeScreen {
-
-    display: none;
-
-    min-height: 100vh;
-
-    padding: 30px;
-}
-
-.customize {
-
-    max-width: 1100px;
-
-    height: calc(100vh - 60px);
-
-    margin: auto;
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    overflow: hidden;
-
-    background: rgba(255,255,255,.9);
-
-    backdrop-filter: blur(20px);
-
-    border-radius: 35px;
-
-    box-shadow:
-        0 25px 80px rgba(50,40,100,.15);
+.color-edit{
+    position:absolute;
+    left:20px;
+    top:50%;
+    transform:translateY(-50%);
+    width:52px;
+    height:52px;
+    border:none;
+    border-radius:17px;
+    background:white;
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
+    font-size:24px;
+    cursor:pointer;
+    z-index:20;
 }
 
 /* =========================
-   CHARACTER AREA
+COLOR PANEL
 ========================= */
 
-.character-area {
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
-
-    padding: 30px;
+.color-panel{
+    position:absolute;
+    left:85px;
+    top:50%;
+    transform:translateY(-50%);
+    width:190px;
+    background:white;
+    border-radius:20px;
+    padding:17px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    display:none;
+    z-index:30;
 }
 
-.character-title {
+.color-panel.open{
+    display:block;
+}
 
-    font-size: 28px;
+.color-panel h3{
+    margin-bottom:13px;
+}
 
-    font-weight: 800;
+.color-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:10px 0;
+    font-size:14px;
+}
 
-    margin-bottom: 25px;
+.color-row input{
+    width:48px;
+    height:35px;
+    padding:2px;
+    border:none;
 }
 
 /* =========================
-   CHARACTER
+OPTIONS
 ========================= */
 
-.character {
-
-    width: 300px;
-
-    height: 430px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    position: relative;
-
-    animation: floating 3s ease-in-out infinite;
+.options-area{
+    padding:40px;
+    overflow-y:auto;
 }
 
-@keyframes floating {
+.options-area h1{
+    font-size:30px;
+    margin-bottom:7px;
+}
 
-    0%,
-    100% {
-        transform: translateY(0);
+.options-area p{
+    color:#777;
+    margin-bottom:22px;
+}
+
+.categories{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-bottom:22px;
+}
+
+.category{
+    border:none;
+    background:#f1f1f6;
+    padding:11px 15px;
+    border-radius:13px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.category.active{
+    background:#806cff;
+    color:white;
+}
+
+.items{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.item{
+    min-height:90px;
+    border:2px solid #eee;
+    border-radius:18px;
+    background:white;
+    cursor:pointer;
+    transition:.2s;
+    font-size:25px;
+}
+
+.item:hover{
+    transform:translateY(-3px);
+    border-color:#806cff;
+}
+
+.item.selected{
+    border-color:#806cff;
+    background:#f4f1ff;
+}
+
+.save-character{
+    width:100%;
+    margin-top:25px;
+    padding:16px;
+    border:none;
+    border-radius:15px;
+    background:#806cff;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:850px){
+
+    body{
+        overflow:auto;
     }
 
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
-/* =========================
-   HEAD
-========================= */
-
-.head {
-
-    width: 120px;
-
-    height: 130px;
-
-    border-radius:
-        50% 50%
-        45% 45%;
-
-    background: #f3c7a5;
-
-    position: relative;
-
-    z-index: 5;
-}
-
-/* =========================
-   HAIR
-========================= */
-
-.hair {
-
-    position: absolute;
-
-    top: -22px;
-
-    left: -10px;
-
-    width: 140px;
-
-    height: 82px;
-
-    border-radius:
-        70px 70px
-        35px 35px;
-
-    background: #4b3428;
-
-    z-index: 6;
-
-    transition: .35s;
-}
-
-.hair::before,
-.hair::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 32px;
-
-    height: 70px;
-
-    background: inherit;
-
-    top: 25px;
-
-    border-radius: 20px;
-}
-
-.hair::before {
-    left: -4px;
-}
-
-.hair::after {
-    right: -4px;
-}
-
-/* =========================
-   EYES
-========================= */
-
-.eye {
-
-    position: absolute;
-
-    width: 11px;
-
-    height: 15px;
-
-    border-radius: 50%;
-
-    background: #222;
-
-    top: 60px;
-
-    transition: .3s;
-}
-
-.eye::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 4px;
-
-    height: 5px;
-
-    background: white;
-
-    border-radius: 50%;
-
-    top: 2px;
-
-    left: 2px;
-}
-
-.eye.left {
-    left: 30px;
-}
-
-.eye.right {
-    right: 30px;
-}
-
-/* =========================
-   SMILE
-========================= */
-
-.smile {
-
-    position: absolute;
-
-    width: 30px;
-
-    height: 13px;
-
-    border-bottom:
-        3px solid #222;
-
-    border-radius: 50%;
-
-    left: 45px;
-
-    top: 87px;
-}
-
-/* =========================
-   SHIRT
-========================= */
-
-.body {
-
-    width: 155px;
-
-    height: 155px;
-
-    background: #806cff;
-
-    border-radius:
-        35px 35px
-        20px 20px;
-
-    margin-top: -4px;
-
-    z-index: 3;
-
-    transition: .35s;
-}
-
-/* =========================
-   PANTS
-========================= */
-
-.legs {
-
-    display: flex;
-
-    gap: 20px;
-}
-
-.leg {
-
-    width: 46px;
-
-    height: 105px;
-
-    background: #30354d;
-
-    border-radius:
-        0 0 18px 18px;
-
-    transition: .35s;
-}
-
-/* =========================
-   SHOES
-========================= */
-
-.shoe {
-
-    width: 68px;
-
-    height: 29px;
-
-    background: white;
-
-    border-radius: 20px;
-
-    margin-top: -3px;
-
-    transition: .35s;
-}
-
-/* =========================
-   OPTIONS
-========================= */
-
-.options-area {
-
-    padding: 45px;
-
-    overflow-y: auto;
-}
-
-.options-area h1 {
-
-    font-size: 30px;
-
-    margin-bottom: 8px;
-}
-
-.options-area p {
-
-    color: #777;
-
-    margin-bottom: 25px;
-}
-
-/* =========================
-   CATEGORIES
-========================= */
-
-.categories {
-
-    display: flex;
-
-    gap: 10px;
-
-    flex-wrap: wrap;
-
-    margin-bottom: 25px;
-}
-
-.category {
-
-    border: none;
-
-    background: #f2f2f7;
-
-    padding: 11px 16px;
-
-    border-radius: 13px;
-
-    cursor: pointer;
-
-    font-weight: bold;
-
-    transition: .2s;
-}
-
-.category:hover {
-
-    transform: translateY(-2px);
-}
-
-.category.active {
-
-    background: #806cff;
-
-    color: white;
-}
-
-/* =========================
-   ITEMS
-========================= */
-
-.items {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap: 12px;
-}
-
-.item {
-
-    min-height: 90px;
-
-    border:
-        2px solid #eee;
-
-    border-radius: 18px;
-
-    background: white;
-
-    cursor: pointer;
-
-    font-size: 30px;
-
-    transition: .2s;
-}
-
-.item:hover {
-
-    transform:
-        translateY(-3px);
-
-    border-color:
-        #806cff;
-}
-
-/* =========================
-   SAVE
-========================= */
-
-.save-character {
-
-    width: 100%;
-
-    border: none;
-
-    margin-top: 25px;
-
-    padding: 16px;
-
-    border-radius: 16px;
-
-    background: #806cff;
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: .2s;
-}
-
-.save-character:hover {
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 8px 20px
-        rgba(128,108,255,.25);
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:800px) {
-
-    body {
-        overflow: auto;
+    #customizeScreen{
+        padding:12px;
     }
 
-    #customizeScreen {
-        padding: 15px;
+    .customize{
+        grid-template-columns:1fr;
     }
 
-    .customize {
-
-        height: auto;
-
-        grid-template-columns:
-            1fr;
+    .character-area{
+        min-height:500px;
     }
 
-    .options-area {
-        padding: 25px;
+    .options-area{
+        padding:25px;
     }
 
-    .character {
-        transform: scale(.85);
+    .color-edit{
+        left:10px;
+    }
+
+    .color-panel{
+        left:70px;
     }
 }
 
@@ -759,9 +573,9 @@ select:focus {
 
 <body class="neutral">
 
-<!-- ==================================================
-     LOGIN SCREEN
-================================================== -->
+<!-- =================================================
+LOGIN
+================================================= -->
 
 <div id="loginScreen">
 
@@ -776,8 +590,6 @@ select:focus {
 <div class="subtitle">
 Start your study journey
 </div>
-
-<!-- LANGUAGE -->
 
 <div class="language-title">
 🌍 Language
@@ -805,8 +617,6 @@ onclick="setLanguage('ar')">
 
 </div>
 
-<!-- NAME -->
-
 <div class="input-group">
 
 <label id="nameLabel">
@@ -819,8 +629,6 @@ type="text"
 placeholder="Enter your name">
 
 </div>
-
-<!-- AGE -->
 
 <div class="input-group">
 
@@ -836,8 +644,6 @@ max="25"
 placeholder="Enter your age">
 
 </div>
-
-<!-- SCHOOL -->
 
 <div class="input-group">
 
@@ -869,8 +675,6 @@ Select your school year
 </select>
 
 </div>
-
-<!-- GENDER -->
 
 <div
 class="gender-title"
@@ -911,13 +715,14 @@ Continue →
 </button>
 
 </div>
-</div>
 
 </div>
 
-<!-- ==================================================
-     CUSTOMIZE SCREEN
-================================================== -->
+</div>
+
+<!-- =================================================
+CUSTOMIZE
+================================================= -->
 
 <div id="customizeScreen">
 
@@ -927,20 +732,83 @@ Continue →
 
 <div class="character-area">
 
+<button
+class="color-edit"
+onclick="toggleColors()">
+
+✏️
+
+</button>
+
+<div
+class="color-panel"
+id="colorPanel">
+
+<h3>🎨 Colors</h3>
+
+<div class="color-row">
+
+<span>Hair</span>
+
+<input
+type="color"
+value="#4b3428"
+oninput="changeColor('hair',this.value)">
+
+</div>
+
+<div class="color-row">
+
+<span>Outfit</span>
+
+<input
+type="color"
+value="#806cff"
+oninput="changeColor('shirt',this.value)">
+
+</div>
+
+<div class="color-row">
+
+<span>Pants</span>
+
+<input
+type="color"
+value="#35405c"
+oninput="changeColor('pants',this.value)">
+
+</div>
+
+<div class="color-row">
+
+<span>Shoes</span>
+
+<input
+type="color"
+value="#ffffff"
+oninput="changeColor('shoes',this.value)">
+
+</div>
+
+</div>
+
 <div class="character-title">
 ✨ Your Character
 </div>
 
 <div class="character">
 
+<div class="floor"></div>
+
 <div class="head">
 
 <div
-class="hair"
+class="hair long"
 id="hair">
 </div>
 
 <div class="eye left"></div>
+
 <div class="eye right"></div>
 
 <div class="smile"></div>
@@ -948,7 +816,7 @@ id="hair">
 </div>
 
 <div
-class="body"
+class="avatar-body"
 id="shirt">
 </div>
 
@@ -966,7 +834,7 @@ id="pants2">
 
 </div>
 
-<div class="legs">
+<div class="shoes">
 
 <div
 class="shoe"
@@ -978,6 +846,11 @@ class="shoe"
 id="shoe2">
 </div>
 
+</div>
+
+<div
+class="accessory"
+id="accessory">
 </div>
 
 </div>
@@ -993,14 +866,14 @@ Customize Character
 </h1>
 
 <p>
-Create your own study character ✨
+Create your own Study Quest character ✨
 </p>
 
 <div class="categories">
 
 <button
 class="category active"
-onclick="showCategory('hair', this)">
+onclick="showCategory('hair',this)">
 
 💇 Hair
 
@@ -1008,15 +881,23 @@ onclick="showCategory('hair', this)">
 
 <button
 class="category"
-onclick="showCategory('clothes', this)">
+onclick="showCategory('face',this)">
 
-👕 Clothes
+😊 Face
 
 </button>
 
 <button
 class="category"
-onclick="showCategory('pants', this)">
+onclick="showCategory('clothes',this)">
+
+👕 Outfit
+
+</button>
+
+<button
+class="category"
+onclick="showCategory('pants',this)">
 
 👖 Pants
 
@@ -1024,9 +905,17 @@ onclick="showCategory('pants', this)">
 
 <button
 class="category"
-onclick="showCategory('shoes', this)">
+onclick="showCategory('shoes',this)">
 
 👟 Shoes
+
+</button>
+
+<button
+class="category"
+onclick="showCategory('accessories',this)">
+
+🎒 Accessories
 
 </button>
 
@@ -1041,7 +930,7 @@ id="items">
 class="save-character"
 onclick="saveCharacter()">
 
-Save Character ✨
+💾 Save Character
 
 </button>
 
@@ -1054,7 +943,7 @@ Save Character ✨
 <script>
 
 /* =========================
-   VARIABLES
+VARIABLES
 ========================= */
 
 let language = "en";
@@ -1064,487 +953,661 @@ let gender = "";
 let currentCategory = "hair";
 
 
+let character = {
+
+hair:"#4b3428",
+
+shirt:"#806cff",
+
+pants:"#35405c",
+
+shoes:"#ffffff",
+
+hairStyle:"long",
+
+face:"normal",
+
+accessory:"none"
+
+};
+
+
 /* =========================
-   LANGUAGE
+LANGUAGE
 ========================= */
 
-function setLanguage(lang) {
+function setLanguage(lang){
 
-    language = lang;
+language=lang;
 
-    document
-    .getElementById("englishBtn")
-    .classList
-    .toggle(
-        "active",
-        lang === "en"
-    );
+document
+.getElementById("englishBtn")
+.classList
+.toggle("active",lang==="en");
 
-    document
-    .getElementById("arabicBtn")
-    .classList
-    .toggle(
-        "active",
-        lang === "ar"
-    );
+document
+.getElementById("arabicBtn")
+.classList
+.toggle("active",lang==="ar");
 
+if(lang==="ar"){
 
-    if(lang === "ar") {
+document.documentElement.lang="ar";
 
-        document.documentElement.lang = "ar";
+document.documentElement.dir="rtl";
 
-        document.documentElement.dir = "rtl";
+document.querySelector(".subtitle")
+.textContent="ابدأ رحلتك الدراسية";
 
-        document
-        .querySelector(".subtitle")
-        .textContent =
-        "ابدأ رحلتك الدراسية";
+document.querySelector(".language-title")
+.textContent="🌍 اللغة";
 
-        document
-        .querySelector(".language-title")
-        .textContent =
-        "🌍 اللغة";
+document.getElementById("nameLabel")
+.textContent="👤 الاسم";
 
-        document
-        .getElementById("nameLabel")
-        .textContent =
-        "👤 الاسم";
+document.getElementById("ageLabel")
+.textContent="🎂 السن";
 
-        document
-        .getElementById("ageLabel")
-        .textContent =
-        "🎂 السن";
+document.getElementById("schoolLabel")
+.textContent="🎓 السنة الدراسية";
 
-        document
-        .getElementById("schoolLabel")
-        .textContent =
-        "🎓 السنة الدراسية";
+document.getElementById("genderTitle")
+.textContent="👤 اختار نوع شخصيتك";
 
-        document
-        .getElementById("genderTitle")
-        .textContent =
-        "👤 اختار نوع شخصيتك";
+document.getElementById("name")
+.placeholder="اكتب اسمك";
 
-        document
-        .getElementById("name")
-        .placeholder =
-        "اكتب اسمك";
+document.getElementById("age")
+.placeholder="اكتب سنك";
 
-        document
-        .getElementById("age")
-        .placeholder =
-        "اكتب سنك";
+document.querySelector(".continue")
+.textContent="متابعة ←";
 
-        document
-        .querySelector(".continue")
-        .textContent =
-        "متابعة ←";
+}else{
 
-    }
+document.documentElement.lang="en";
 
-    else {
+document.documentElement.dir="ltr";
 
-        document.documentElement.lang = "en";
+document.querySelector(".subtitle")
+.textContent="Start your study journey";
 
-        document.documentElement.dir = "ltr";
+document.querySelector(".language-title")
+.textContent="🌍 Language";
 
-        document
-        .querySelector(".subtitle")
-        .textContent =
-        "Start your study journey";
+document.getElementById("nameLabel")
+.textContent="👤 Name";
 
-        document
-        .querySelector(".language-title")
-        .textContent =
-        "🌍 Language";
+document.getElementById("ageLabel")
+.textContent="🎂 Age";
 
-        document
-        .getElementById("nameLabel")
-        .textContent =
-        "👤 Name";
+document.getElementById("schoolLabel")
+.textContent="🎓 School year";
 
-        document
-        .getElementById("ageLabel")
-        .textContent =
-        "🎂 Age";
+document.getElementById("genderTitle")
+.textContent="👤 Choose your character type";
 
-        document
-        .getElementById("schoolLabel")
-        .textContent =
-        "🎓 School year";
+document.getElementById("name")
+.placeholder="Enter your name";
 
-        document
-        .getElementById("genderTitle")
-        .textContent =
-        "👤 Choose your character type";
+document.getElementById("age")
+.placeholder="Enter your age";
 
-        document
-        .getElementById("name")
-        .placeholder =
-        "Enter your name";
+document.querySelector(".continue")
+.textContent="Continue →";
 
-        document
-        .getElementById("age")
-        .placeholder =
-        "Enter your age";
+}
 
-        document
-        .querySelector(".continue")
-        .textContent =
-        "Continue →";
-    }
 }
 
 
 /* =========================
-   GENDER
+GENDER
 ========================= */
 
-function chooseGender(type) {
+function chooseGender(type){
 
-    gender = type;
+gender=type;
 
-    document
-    .getElementById("girlBtn")
-    .classList
-    .remove("selected");
+document
+.getElementById("girlBtn")
+.classList.remove("selected");
 
-    document
-    .getElementById("boyBtn")
-    .classList
-    .remove("selected");
+document
+.getElementById("boyBtn")
+.classList.remove("selected");
 
 
-    if(type === "girl") {
+if(type==="girl"){
 
-        document
-        .getElementById("girlBtn")
-        .classList
-        .add(
-            "selected",
-            "girl"
-        );
+document
+.getElementById("girlBtn")
+.classList.add("selected","girl");
 
-        document.body.className = "girl";
+document.body.className="girl";
 
-    }
+}else{
 
-    else {
+document
+.getElementById("boyBtn")
+.classList.add("selected","boy");
 
-        document
-        .getElementById("boyBtn")
-        .classList
-        .add(
-            "selected",
-            "boy"
-        );
+document.body.className="boy";
 
-        document.body.className = "boy";
-    }
+}
+
 }
 
 
 /* =========================
-   CONTINUE
+CONTINUE
 ========================= */
 
-function continueApp() {
+function continueApp(){
 
-    const name =
-        document
-        .getElementById("name")
-        .value
-        .trim();
+const name=document
+.getElementById("name")
+.value
+.trim();
 
-    const age =
-        document
-        .getElementById("age")
-        .value;
+const age=document
+.getElementById("age")
+.value;
 
-    const school =
-        document
-        .getElementById("school")
-        .value;
+const school=document
+.getElementById("school")
+.value;
 
 
-    if(
-        !name ||
-        !age ||
-        !school ||
-        !gender
-    ) {
+if(!name || !age || !school || !gender){
 
-        alert(
-            language === "ar"
-            ? "من فضلك كمّل كل البيانات ❤️"
-            : "Please complete all the information ❤️"
-        );
+alert(
+language==="ar"
+?"من فضلك كمّل كل البيانات ❤️"
+:"Please complete all the information ❤️"
+);
 
-        return;
-    }
-
-
-    localStorage.setItem(
-        "studyQuestName",
-        name
-    );
-
-    localStorage.setItem(
-        "studyQuestAge",
-        age
-    );
-
-    localStorage.setItem(
-        "studyQuestSchool",
-        school
-    );
-
-    localStorage.setItem(
-        "studyQuestGender",
-        gender
-    );
-
-    localStorage.setItem(
-        "studyQuestLanguage",
-        language
-    );
-
-
-    document
-    .getElementById("loginScreen")
-    .style.display = "none";
-
-    document
-    .getElementById("customizeScreen")
-    .style.display = "block";
+return;
 }
 
 
-/* =========================
-   CATEGORIES
-========================= */
+localStorage.setItem(
+"studyQuestName",
+name
+);
 
-function showCategory(category, button) {
+localStorage.setItem(
+"studyQuestAge",
+age
+);
 
-    currentCategory = category;
+localStorage.setItem(
+"studyQuestSchool",
+school
+);
 
+localStorage.setItem(
+"studyQuestGender",
+gender
+);
 
-    document
-    .querySelectorAll(".category")
-    .forEach(
-        item =>
-        item.classList.remove("active")
-    );
+localStorage.setItem(
+"studyQuestLanguage",
+language
+);
 
 
-    button.classList.add("active");
+document.getElementById("loginScreen")
+.style.display="none";
 
+document.getElementById("customizeScreen")
+.style.display="block";
 
-    const items =
-        document.getElementById("items");
-
-
-    items.innerHTML = "";
-
-
-    if(category === "hair") {
-
-        items.innerHTML = `
-
-        <button
-        class="item"
-        onclick="changeHair('#4b3428')">
-        🤎
-        </button>
-
-        <button
-        class="item"
-        onclick="changeHair('#222222')">
-        🖤
-        </button>
-
-        <button
-        class="item"
-        onclick="changeHair('#d49b52')">
-        💛
-        </button>
-
-        `;
-    }
-
-
-    if(category === "clothes") {
-
-        items.innerHTML = `
-
-        <button
-        class="item"
-        onclick="changeShirt('#806cff')">
-        💜
-        </button>
-
-        <button
-        class="item"
-        onclick="changeShirt('#ff72ae')">
-        🩷
-        </button>
-
-        <button
-        class="item"
-        onclick="changeShirt('#4d9cff')">
-        💙
-        </button>
-
-        `;
-    }
-
-
-    if(category === "pants") {
-
-        items.innerHTML = `
-
-        <button
-        class="item"
-        onclick="changePants('#30354d')">
-        🖤
-        </button>
-
-        <button
-        class="item"
-        onclick="changePants('#496c9e')">
-        💙
-        </button>
-
-        <button
-        class="item"
-        onclick="changePants('#754c36')">
-        🤎
-        </button>
-
-        `;
-    }
-
-
-    if(category === "shoes") {
-
-        items.innerHTML = `
-
-        <button
-        class="item"
-        onclick="changeShoes('#ffffff')">
-        🤍
-        </button>
-
-        <button
-        class="item"
-        onclick="changeShoes('#222222')">
-        🖤
-        </button>
-
-        <button
-        class="item"
-        onclick="changeShoes('#ff72ae')">
-        🩷
-        </button>
-
-        `;
-    }
-}
-
-
-/* =========================
-   HAIR
-========================= */
-
-function changeHair(color) {
-
-    document
-    .getElementById("hair")
-    .style
-    .background = color;
-}
-
-
-/* =========================
-   SHIRT
-========================= */
-
-function changeShirt(color) {
-
-    document
-    .getElementById("shirt")
-    .style
-    .background = color;
-}
-
-
-/* =========================
-   PANTS
-========================= */
-
-function changePants(color) {
-
-    document
-    .getElementById("pants1")
-    .style
-    .background = color;
-
-    document
-    .getElementById("pants2")
-    .style
-    .background = color;
-}
-
-
-/* =========================
-   SHOES
-========================= */
-
-function changeShoes(color) {
-
-    document
-    .getElementById("shoe1")
-    .style
-    .background = color;
-
-    document
-    .getElementById("shoe2")
-    .style
-    .background = color;
-}
-
-
-/* =========================
-   SAVE
-========================= */
-
-function saveCharacter() {
-
-    localStorage.setItem(
-        "studyQuestCharacterSaved",
-        "true"
-    );
-
-
-    alert(
-        language === "ar"
-        ? "تم حفظ شخصيتك ✨"
-        : "Your character has been saved ✨"
-    );
-}
-
-
-/* =========================
-   FIRST CATEGORY
-========================= */
-
-const firstCategory =
-    document.querySelector(".category");
 
 showCategory(
-    "hair",
-    firstCategory
+"hair",
+document.querySelector(".category")
 );
+
+}
+
+
+/* =========================
+CATEGORY
+========================= */
+
+function showCategory(category,button){
+
+currentCategory=category;
+
+
+document
+.querySelectorAll(".category")
+.forEach(
+b=>b.classList.remove("active")
+);
+
+button.classList.add("active");
+
+
+const items=document
+.getElementById("items");
+
+items.innerHTML="";
+
+
+if(category==="hair"){
+
+items.innerHTML=`
+
+<button class="item" onclick="hairStyle('long',this)">
+💇‍♀️
+</button>
+
+<button class="item" onclick="hairStyle('short',this)">
+✂️
+</button>
+
+<button class="item" onclick="hairStyle('curly',this)">
+🌀
+</button>
+
+<button class="item" onclick="hairStyle('ponytail',this)">
+🎀
+</button>
+
+<button class="item" onclick="hairStyle('bun',this)">
+👱‍♀️
+</button>
+
+<button class="item" onclick="hairStyle('wavy',this)">
+〰️
+</button>
+
+`;
+
+}
+
+
+if(category==="face"){
+
+items.innerHTML=`
+
+<button class="item" onclick="faceStyle('normal',this)">
+😊
+</button>
+
+<button class="item" onclick="faceStyle('happy',this)">
+😄
+</button>
+
+<button class="item" onclick="faceStyle('calm',this)">
+😌
+</button>
+
+<button class="item" onclick="faceStyle('cool',this)">
+😎
+</button>
+
+`;
+
+}
+
+
+if(category==="clothes"){
+
+items.innerHTML=`
+
+<button class="item" onclick="changeColor('shirt','#806cff');selectItem(this)">
+👕
+</button>
+
+<button class="item" onclick="changeColor('shirt','#ff72ae');selectItem(this)">
+👚
+</button>
+
+<button class="item" onclick="changeColor('shirt','#4d9cff');selectItem(this)">
+🧥
+</button>
+
+<button class="item" onclick="changeColor('shirt','#54b88b');selectItem(this)">
+🧶
+</button>
+
+<button class="item" onclick="changeColor('shirt','#f0a64b');selectItem(this)">
+🏃
+</button>
+
+<button class="item" onclick="changeColor('shirt','#444');selectItem(this)">
+🎮
+</button>
+
+`;
+
+}
+
+
+if(category==="pants"){
+
+items.innerHTML=`
+
+<button class="item" onclick="changeColor('pants','#35405c');selectItem(this)">
+👖
+</button>
+
+<button class="item" onclick="changeColor('pants','#496c9e');selectItem(this)">
+🩳
+</button>
+
+<button class="item" onclick="changeColor('pants','#754c36');selectItem(this)">
+🤎
+</button>
+
+`;
+
+}
+
+
+if(category==="shoes"){
+
+items.innerHTML=`
+
+<button class="item" onclick="changeColor('shoes','#ffffff');selectItem(this)">
+👟
+</button>
+
+<button class="item" onclick="changeColor('shoes','#222222');selectItem(this)">
+🥾
+</button>
+
+<button class="item" onclick="changeColor('shoes','#ff72ae');selectItem(this)">
+👟
+</button>
+
+`;
+
+}
+
+
+if(category==="accessories"){
+
+items.innerHTML=`
+
+<button class="item" onclick="setAccessory('🎒',this)">
+🎒
+</button>
+
+<button class="item" onclick="setAccessory('🎧',this)">
+🎧
+</button>
+
+<button class="item" onclick="setAccessory('🧢',this)">
+🧢
+</button>
+
+<button class="item" onclick="setAccessory('👓',this)">
+👓
+</button>
+
+<button class="item" onclick="setAccessory('⌚',this)">
+⌚
+</button>
+
+<button class="item" onclick="setAccessory('📚',this)">
+📚
+</button>
+
+`;
+
+}
+
+}
+
+
+/* =========================
+HAIR
+========================= */
+
+function hairStyle(style,button){
+
+character.hairStyle=style;
+
+const hair=document
+.getElementById("hair");
+
+hair.className="hair";
+
+
+if(style==="long"){
+
+hair.classList.add("long");
+
+}
+
+if(style==="short"){
+
+hair.style.height="55px";
+
+hair.style.borderRadius="60px 60px 25px 25px";
+
+}
+
+if(style==="curly"){
+
+hair.style.borderRadius="45%";
+
+hair.style.height="90px";
+
+}
+
+if(style==="ponytail"){
+
+hair.style.borderRadius="70px 70px 30px 30px";
+
+}
+
+if(style==="bun"){
+
+hair.style.height="65px";
+
+hair.style.borderRadius="50%";
+
+}
+
+if(style==="wavy"){
+
+hair.style.borderRadius="45% 55% 35% 50%";
+
+hair.style.height="92px";
+
+}
+
+
+selectItem(button);
+
+}
+
+
+/* =========================
+FACE
+========================= */
+
+function faceStyle(style,button){
+
+character.face=style;
+
+const eyes=document
+.querySelectorAll(".eye");
+
+const smile=document
+.querySelector(".smile");
+
+
+if(style==="cool"){
+
+eyes.forEach(
+e=>e.style.height="7px"
+);
+
+smile.style.width="20px";
+
+}
+
+else if(style==="happy"){
+
+eyes.forEach(
+e=>e.style.height="13px"
+);
+
+smile.style.width="38px";
+
+}
+
+else if(style==="calm"){
+
+eyes.forEach(
+e=>e.style.height="10px"
+);
+
+smile.style.width="25px";
+
+}
+
+else{
+
+eyes.forEach(
+e=>e.style.height="16px"
+);
+
+smile.style.width="31px";
+
+}
+
+selectItem(button);
+
+}
+
+
+/* =========================
+COLORS
+========================= */
+
+function changeColor(type,color){
+
+character[type]=color;
+
+
+if(type==="hair"){
+
+document
+.getElementById("hair")
+.style.background=color;
+
+}
+
+if(type==="shirt"){
+
+document
+.getElementById("shirt")
+.style.background=color;
+
+}
+
+if(type==="pants"){
+
+document
+.getElementById("pants1")
+.style.background=color;
+
+document
+.getElementById("pants2")
+.style.background=color;
+
+}
+
+if(type==="shoes"){
+
+document
+.getElementById("shoe1")
+.style.background=color;
+
+document
+.getElementById("shoe2")
+.style.background=color;
+
+}
+
+}
+
+
+/* =========================
+ACCESSORIES
+========================= */
+
+function setAccessory(item,button){
+
+character.accessory=item;
+
+const accessory=document
+.getElementById("accessory");
+
+accessory.textContent=item;
+
+accessory.style.display="block";
+
+selectItem(button);
+
+}
+
+
+/* =========================
+SELECT ITEM
+========================= */
+
+function selectItem(button){
+
+document
+.querySelectorAll(".item")
+.forEach(
+b=>b.classList.remove("selected")
+);
+
+button.classList.add("selected");
+
+}
+
+
+/* =========================
+COLOR PANEL
+========================= */
+
+function toggleColors(){
+
+document
+.getElementById("colorPanel")
+.classList.toggle("open");
+
+}
+
+
+/* =========================
+SAVE
+========================= */
+
+function saveCharacter(){
+
+localStorage.setItem(
+"studyQuestCharacter",
+JSON.stringify(character)
+);
+
+alert(
+language==="ar"
+?"تم حفظ شخصيتك بنجاح ✨"
+:"Your character has been saved ✨"
+);
+
+}
 
 </script>
 
