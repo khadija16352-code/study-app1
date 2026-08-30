@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -16,8 +15,9 @@
 body{
     font-family:Arial,sans-serif;
     min-height:100vh;
-    transition:.4s;
     overflow-x:hidden;
+    transition:.4s;
+    color:#29243d;
 }
 
 body.neutral{
@@ -25,14 +25,18 @@ body.neutral{
 }
 
 body.girl{
-    background:linear-gradient(135deg,#ffd9eb,#e9ddff);
+    background:
+        radial-gradient(circle at 15% 15%,#fff 0 5%,transparent 6%),
+        linear-gradient(135deg,#ffd7e9,#e5dcff);
 }
 
 body.boy{
-    background:linear-gradient(135deg,#d2efff,#dddfff);
+    background:
+        radial-gradient(circle at 85% 15%,#fff 0 5%,transparent 6%),
+        linear-gradient(135deg,#ccecff,#dcdcff);
 }
 
-button{
+button,input,select{
     font-family:inherit;
 }
 
@@ -55,17 +59,17 @@ LOGIN
 .login-card{
     width:100%;
     max-width:470px;
-    background:rgba(255,255,255,.93);
-    backdrop-filter:blur(18px);
-    border-radius:30px;
     padding:38px;
-    box-shadow:0 25px 70px rgba(50,40,100,.15);
+    border-radius:30px;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(20px);
+    box-shadow:0 30px 80px rgba(50,40,100,.16);
 }
 
 .logo{
     text-align:center;
     font-size:34px;
-    font-weight:800;
+    font-weight:900;
     margin-bottom:8px;
 }
 
@@ -154,12 +158,13 @@ select:focus{
     background:#eef7ff;
 }
 
-.continue{
+.continue,
+.save-character{
     width:100%;
     padding:16px;
-    border:none;
+    border:0;
     border-radius:15px;
-    background:#806cff;
+    background:linear-gradient(135deg,#806cff,#a084ff);
     color:white;
     font-size:16px;
     font-weight:bold;
@@ -167,9 +172,10 @@ select:focus{
     transition:.2s;
 }
 
-.continue:hover{
+.continue:hover,
+.save-character:hover{
     transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(128,108,255,.25);
+    box-shadow:0 10px 25px rgba(128,108,255,.3);
 }
 
 /* =========================
@@ -183,16 +189,16 @@ CUSTOMIZE
 }
 
 .customize{
-    max-width:1200px;
+    max-width:1250px;
     min-height:calc(100vh - 50px);
     margin:auto;
     display:grid;
-    grid-template-columns:45% 55%;
+    grid-template-columns:48% 52%;
     background:rgba(255,255,255,.92);
     backdrop-filter:blur(20px);
-    border-radius:32px;
+    border-radius:34px;
     overflow:hidden;
-    box-shadow:0 25px 80px rgba(50,40,100,.15);
+    box-shadow:0 30px 90px rgba(50,40,100,.17);
 }
 
 /* =========================
@@ -201,60 +207,93 @@ CHARACTER AREA
 
 .character-area{
     position:relative;
+    min-height:650px;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    padding:30px;
+    padding:35px;
+    background:
+        radial-gradient(circle at 50% 25%,rgba(255,255,255,.8),transparent 35%);
 }
 
 .character-title{
-    font-size:28px;
-    font-weight:800;
-    margin-bottom:20px;
+    font-size:27px;
+    font-weight:900;
+    margin-bottom:12px;
+}
+
+.character-subtitle{
+    color:#888;
+    font-size:13px;
+    margin-bottom:15px;
 }
 
 .character{
-    width:300px;
-    height:450px;
+    width:310px;
+    height:480px;
     position:relative;
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
-    animation:float 3s ease-in-out infinite;
+    justify-content:flex-start;
+    padding-top:20px;
+    animation:float 3.5s ease-in-out infinite;
 }
 
 @keyframes float{
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-7px);
-    }
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
 }
+
+/* floor */
 
 .floor{
     position:absolute;
-    bottom:35px;
-    width:190px;
-    height:30px;
+    bottom:15px;
+    width:205px;
+    height:34px;
     border-radius:50%;
-    background:rgba(80,70,130,.12);
+    background:rgba(70,60,120,.13);
+    filter:blur(2px);
 }
 
 /* =========================
-HEAD
+CHARACTER HEAD
 ========================= */
 
 .head{
     position:relative;
-    width:125px;
-    height:135px;
-    background:#f1c6a5;
+    width:132px;
+    height:145px;
+    background:#f2c6a5;
     border-radius:48% 48% 45% 45%;
     z-index:5;
+    box-shadow:
+        inset -7px -5px 0 rgba(0,0,0,.04),
+        0 8px 20px rgba(50,40,40,.1);
+}
+
+/* ears */
+
+.head::before,
+.head::after{
+    content:"";
+    position:absolute;
+    width:22px;
+    height:32px;
+    top:60px;
+    background:#edbd9c;
+    border-radius:50%;
+    z-index:-1;
+}
+
+.head::before{
+    left:-13px;
+}
+
+.head::after{
+    right:-13px;
 }
 
 /* =========================
@@ -263,14 +302,15 @@ HAIR
 
 .hair{
     position:absolute;
-    top:-22px;
-    left:-8px;
-    width:141px;
-    height:82px;
-    background:#4b3428;
-    border-radius:70px 70px 35px 35px;
-    z-index:7;
+    top:-24px;
+    left:-10px;
+    width:152px;
+    height:92px;
+    background:#493126;
+    border-radius:75px 75px 35px 35px;
+    z-index:8;
     transition:.3s;
+    box-shadow:inset -7px -4px rgba(0,0,0,.08);
 }
 
 .hair.long::before,
@@ -278,10 +318,10 @@ HAIR
     content:"";
     position:absolute;
     top:35px;
-    width:32px;
-    height:105px;
+    width:36px;
+    height:125px;
     background:inherit;
-    border-radius:20px;
+    border-radius:25px;
 }
 
 .hair.long::before{
@@ -293,52 +333,65 @@ HAIR
 }
 
 .hair.short{
-    height:58px;
-    border-radius:60px 60px 25px 25px;
+    height:68px;
+    border-radius:70px 70px 25px 25px;
 }
 
 .hair.curly{
-    height:90px;
-    border-radius:45%;
+    height:95px;
+    border-radius:48%;
     box-shadow:
-        -12px 10px 0 #4b3428,
-        12px 10px 0 #4b3428;
+        -15px 8px 0 #493126,
+        15px 8px 0 #493126,
+        -8px 23px 0 #493126,
+        8px 23px 0 #493126;
 }
 
 .hair.ponytail{
-    height:78px;
+    height:82px;
 }
 
 .hair.ponytail::after{
     content:"";
     position:absolute;
-    width:35px;
-    height:80px;
+    width:43px;
+    height:92px;
     background:inherit;
     border-radius:50%;
-    right:-25px;
+    right:-30px;
     top:30px;
 }
 
 .hair.bun{
-    height:65px;
-    border-radius:50%;
+    height:70px;
 }
 
 .hair.bun::after{
     content:"";
     position:absolute;
-    width:48px;
-    height:48px;
+    width:58px;
+    height:58px;
     background:inherit;
     border-radius:50%;
-    left:46px;
-    top:-32px;
+    left:47px;
+    top:-39px;
 }
 
 .hair.wavy{
-    height:88px;
-    border-radius:45% 55% 35% 50%;
+    height:95px;
+    border-radius:50% 50% 38% 45%;
+}
+
+/* fringe */
+
+.hair .fringe{
+    position:absolute;
+    width:70px;
+    height:45px;
+    left:8px;
+    top:35px;
+    background:inherit;
+    border-radius:0 0 55% 45%;
 }
 
 /* =========================
@@ -347,44 +400,86 @@ FACE
 
 .eye{
     position:absolute;
-    top:61px;
-    width:12px;
-    height:16px;
-    background:#222;
+    top:67px;
+    width:15px;
+    height:20px;
+    background:#292431;
     border-radius:50%;
-    z-index:8;
+    z-index:10;
     transition:.3s;
 }
 
-.eye::after{
+.eye::before{
     content:"";
     position:absolute;
-    width:4px;
-    height:5px;
-    background:white;
+    width:5px;
+    height:6px;
+    background:#fff;
     border-radius:50%;
-    top:2px;
-    left:2px;
+    top:3px;
+    left:3px;
 }
 
 .eye.left{
-    left:30px;
+    left:31px;
 }
 
 .eye.right{
-    right:30px;
+    right:31px;
+}
+
+.blush{
+    position:absolute;
+    top:92px;
+    width:22px;
+    height:10px;
+    background:#ef8e98;
+    opacity:.35;
+    border-radius:50%;
+    z-index:9;
+}
+
+.blush.left{
+    left:12px;
+}
+
+.blush.right{
+    right:12px;
+}
+
+.nose{
+    position:absolute;
+    top:91px;
+    left:62px;
+    width:7px;
+    height:6px;
+    border-bottom:2px solid rgba(120,70,60,.5);
+    border-radius:50%;
+    z-index:10;
 }
 
 .smile{
     position:absolute;
-    top:91px;
-    left:47px;
-    width:31px;
-    height:13px;
-    border-bottom:3px solid #333;
+    top:105px;
+    left:49px;
+    width:34px;
+    height:15px;
+    border-bottom:3px solid #733f48;
     border-radius:50%;
-    z-index:8;
+    z-index:10;
     transition:.3s;
+}
+
+/* =========================
+NECK
+========================= */
+
+.neck{
+    width:38px;
+    height:28px;
+    margin-top:-2px;
+    background:#efc19f;
+    z-index:4;
 }
 
 /* =========================
@@ -393,34 +488,49 @@ BODY
 
 .avatar-body{
     position:relative;
-    width:155px;
-    height:145px;
+    width:172px;
+    height:158px;
+    margin-top:-3px;
     background:#806cff;
-    border-radius:35px 35px 22px 22px;
+    border-radius:38px 38px 27px 27px;
     z-index:3;
-    margin-top:-2px;
+    box-shadow:
+        inset -8px -8px 0 rgba(0,0,0,.06),
+        0 12px 20px rgba(50,40,100,.12);
     transition:.3s;
 }
+
+/* sleeves */
 
 .avatar-body::before,
 .avatar-body::after{
     content:"";
     position:absolute;
-    width:35px;
-    height:105px;
-    top:20px;
+    width:42px;
+    height:100px;
+    top:24px;
     background:inherit;
-    border-radius:20px;
+    border-radius:25px;
 }
 
 .avatar-body::before{
-    left:-25px;
+    left:-30px;
     transform:rotate(8deg);
 }
 
 .avatar-body::after{
-    right:-25px;
+    right:-30px;
     transform:rotate(-8deg);
+}
+
+/* shirt decoration */
+
+.shirt-logo{
+    position:absolute;
+    top:55px;
+    left:70px;
+    font-size:24px;
+    z-index:4;
 }
 
 /* =========================
@@ -429,15 +539,16 @@ LEGS
 
 .legs{
     display:flex;
-    gap:17px;
+    gap:18px;
     z-index:2;
 }
 
 .leg{
-    width:48px;
-    height:100px;
+    width:52px;
+    height:105px;
     background:#35405c;
-    border-radius:0 0 18px 18px;
+    border-radius:0 0 20px 20px;
+    box-shadow:inset -6px -5px rgba(0,0,0,.08);
     transition:.3s;
 }
 
@@ -447,17 +558,30 @@ SHOES
 
 .shoes{
     display:flex;
-    gap:8px;
-    margin-top:-4px;
+    gap:10px;
+    margin-top:-3px;
     z-index:4;
 }
 
 .shoe{
-    width:70px;
-    height:30px;
-    background:white;
-    border-radius:20px;
+    position:relative;
+    width:76px;
+    height:33px;
+    background:#fff;
+    border-radius:22px 22px 12px 12px;
+    box-shadow:0 5px 0 rgba(0,0,0,.08);
     transition:.3s;
+}
+
+.shoe::after{
+    content:"";
+    position:absolute;
+    left:15px;
+    top:8px;
+    width:35px;
+    height:3px;
+    background:rgba(0,0,0,.12);
+    border-radius:10px;
 }
 
 /* =========================
@@ -466,36 +590,37 @@ ACCESSORY
 
 .accessory{
     position:absolute;
-    z-index:10;
-    font-size:42px;
-    top:115px;
-    right:45px;
+    z-index:15;
     display:none;
+    font-size:43px;
+    top:165px;
+    right:25px;
+    filter:drop-shadow(0 4px 4px rgba(0,0,0,.12));
 }
 
 /* =========================
-PEN BUTTON
+PEN
 ========================= */
 
 .color-edit{
     position:absolute;
-    left:20px;
+    left:22px;
     top:50%;
     transform:translateY(-50%);
-    width:54px;
-    height:54px;
-    border:none;
-    border-radius:17px;
+    width:58px;
+    height:58px;
+    border:0;
+    border-radius:18px;
     background:white;
-    box-shadow:0 8px 25px rgba(0,0,0,.12);
-    font-size:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,.13);
+    font-size:25px;
     cursor:pointer;
-    z-index:20;
+    z-index:30;
     transition:.2s;
 }
 
 .color-edit:hover{
-    transform:translateY(-50%) scale(1.05);
+    transform:translateY(-50%) scale(1.06);
 }
 
 /* =========================
@@ -504,14 +629,14 @@ COLOR PANEL
 
 .color-panel{
     position:absolute;
-    left:85px;
+    left:92px;
     top:50%;
     transform:translateY(-50%);
-    width:190px;
+    width:210px;
     background:white;
-    border-radius:20px;
-    padding:17px;
-    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    border-radius:22px;
+    padding:18px;
+    box-shadow:0 18px 50px rgba(0,0,0,.16);
     display:none;
     z-index:30;
 }
@@ -521,22 +646,22 @@ COLOR PANEL
 }
 
 .color-panel h3{
-    margin-bottom:13px;
+    margin-bottom:14px;
 }
 
 .color-row{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    margin:10px 0;
+    margin:11px 0;
     font-size:14px;
 }
 
 .color-row input{
-    width:48px;
-    height:35px;
+    width:50px;
+    height:34px;
     padding:2px;
-    border:none;
+    border:0;
 }
 
 /* =========================
@@ -544,12 +669,12 @@ OPTIONS
 ========================= */
 
 .options-area{
-    padding:40px;
+    padding:42px;
     overflow-y:auto;
 }
 
 .options-area h1{
-    font-size:30px;
+    font-size:31px;
     margin-bottom:7px;
 }
 
@@ -562,11 +687,11 @@ OPTIONS
     display:flex;
     flex-wrap:wrap;
     gap:9px;
-    margin-bottom:22px;
+    margin-bottom:24px;
 }
 
 .category{
-    border:none;
+    border:0;
     background:#f1f1f6;
     padding:11px 15px;
     border-radius:13px;
@@ -581,73 +706,80 @@ OPTIONS
 
 .category.active{
     background:#806cff;
-    color:white;
+    color:#fff;
 }
 
 .items{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:12px;
+    gap:13px;
 }
 
 .item{
-    min-height:90px;
+    min-height:100px;
     border:2px solid #eee;
-    border-radius:18px;
-    background:white;
+    border-radius:20px;
+    background:#fff;
     cursor:pointer;
     transition:.2s;
     font-size:25px;
+    color:#333;
 }
 
 .item:hover{
-    transform:translateY(-3px);
+    transform:translateY(-4px);
     border-color:#806cff;
+    box-shadow:0 8px 20px rgba(80,70,150,.1);
 }
 
 .item.selected{
     border-color:#806cff;
     background:#f4f1ff;
+    box-shadow:0 0 0 3px rgba(128,108,255,.1);
 }
 
-/* Hair previews */
+.item small{
+    font-size:12px;
+    display:block;
+    margin-top:6px;
+}
+
+/* hair preview */
 
 .hair-option{
     display:flex;
     flex-direction:column;
-    align-items:center;
     justify-content:center;
-    gap:7px;
+    align-items:center;
 }
 
 .hair-preview{
-    width:45px;
-    height:45px;
-    background:#4b3428;
+    width:48px;
+    height:48px;
+    background:#493126;
     border-radius:50%;
     position:relative;
 }
 
 .hair-preview.long{
-    height:55px;
+    height:59px;
 }
 
 .hair-preview.short{
-    height:38px;
+    height:39px;
 }
 
 .hair-preview.curly{
-    border-radius:45%;
     box-shadow:
-        -7px 7px 0 #4b3428,
-        7px 7px 0 #4b3428;
+        -7px 7px 0 #493126,
+        7px 7px 0 #493126;
 }
 
 .hair-preview.ponytail::after{
     content:"";
     position:absolute;
     width:18px;
-    height:32px;
+    height:35px;
     background:inherit;
     border-radius:50%;
     right:-10px;
@@ -657,12 +789,12 @@ OPTIONS
 .hair-preview.bun::after{
     content:"";
     position:absolute;
-    width:23px;
-    height:23px;
+    width:25px;
+    height:25px;
     background:inherit;
     border-radius:50%;
-    top:-13px;
-    left:11px;
+    left:12px;
+    top:-14px;
 }
 
 .hair-preview.wavy{
@@ -674,22 +806,7 @@ SAVE
 ========================= */
 
 .save-character{
-    width:100%;
     margin-top:25px;
-    padding:16px;
-    border:none;
-    border-radius:15px;
-    background:#806cff;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.save-character:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(128,108,255,.25);
 }
 
 /* =========================
@@ -703,7 +820,7 @@ MOBILE
     }
 
     #customizeScreen{
-        padding:12px;
+        padding:10px;
     }
 
     .customize{
@@ -711,7 +828,7 @@ MOBILE
     }
 
     .character-area{
-        min-height:500px;
+        min-height:600px;
     }
 
     .options-area{
@@ -723,19 +840,36 @@ MOBILE
     }
 
     .color-panel{
-        left:70px;
+        left:75px;
     }
 }
 
-</style>
+@media(max-width:500px){
 
+    .login-card{
+        padding:28px 20px;
+    }
+
+    .items{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .character{
+        transform:scale(.9);
+    }
+
+    .character-area{
+        min-height:560px;
+    }
+}
+</style>
 </head>
 
 <body class="neutral">
 
-<!-- =================================================
+<!-- =========================
 LOGIN
-================================================= -->
+========================= -->
 
 <div id="loginScreen">
 
@@ -743,45 +877,31 @@ LOGIN
 
 <div class="login-card">
 
-<div class="logo">
-📚 Study Quest
-</div>
+<div class="logo">📚 Study Quest</div>
 
-<div class="subtitle">
-Start your study journey
-</div>
+<div class="subtitle">Start your study journey</div>
 
-<div class="language-title">
-🌍 Language
-</div>
+<div class="language-title">🌍 Language</div>
 
 <div class="languages">
 
-<button
-class="language active"
+<button class="language active"
 id="englishBtn"
 onclick="setLanguage('en')">
-
 🇬🇧 English
-
 </button>
 
-<button
-class="language"
+<button class="language"
 id="arabicBtn"
 onclick="setLanguage('ar')">
-
 🇪🇬 العربية
-
 </button>
 
 </div>
 
 <div class="input-group">
 
-<label id="nameLabel">
-👤 Name
-</label>
+<label id="nameLabel">👤 Name</label>
 
 <input
 id="name"
@@ -792,9 +912,7 @@ placeholder="Enter your name">
 
 <div class="input-group">
 
-<label id="ageLabel">
-🎂 Age
-</label>
+<label id="ageLabel">🎂 Age</label>
 
 <input
 id="age"
@@ -807,15 +925,11 @@ placeholder="Enter your age">
 
 <div class="input-group">
 
-<label id="schoolLabel">
-🎓 School year
-</label>
+<label id="schoolLabel">🎓 School year</label>
 
 <select id="school">
 
-<option value="">
-Select your school year
-</option>
+<option value="">Select your school year</option>
 
 <option>Primary 1</option>
 <option>Primary 2</option>
@@ -836,12 +950,8 @@ Select your school year
 
 </div>
 
-<div
-class="gender-title"
-id="genderTitle">
-
+<div class="gender-title" id="genderTitle">
 👤 Choose your character type
-
 </div>
 
 <div class="gender-buttons">
@@ -850,114 +960,86 @@ id="genderTitle">
 class="gender"
 id="girlBtn"
 onclick="chooseGender('girl')">
-
 👧 Girl
-
 </button>
 
 <button
 class="gender"
 id="boyBtn"
 onclick="chooseGender('boy')">
-
 👦 Boy
-
 </button>
 
 </div>
 
-<button
-class="continue"
-onclick="continueApp()">
-
+<button class="continue" onclick="continueApp()">
 Continue →
-
 </button>
 
 </div>
-
+</div>
 </div>
 
-</div>
-
-<!-- =================================================
-CUSTOMIZE SCREEN
-================================================= -->
+<!-- =========================
+CUSTOMIZE
+========================= -->
 
 <div id="customizeScreen">
 
 <div class="customize">
 
-<!-- CHARACTER AREA -->
+<!-- CHARACTER -->
 
 <div class="character-area">
 
-<button
-class="color-edit"
-onclick="toggleColors()">
+<button class="color-edit" onclick="toggleColors()">✏️</button>
 
-✏️
-
-</button>
-
-<div
-class="color-panel"
-id="colorPanel">
+<div class="color-panel" id="colorPanel">
 
 <h3>🎨 Colors</h3>
 
 <div class="color-row">
-
 <span>Hair</span>
-
 <input
 id="hairColor"
 type="color"
-value="#4b3428"
+value="#493126"
 oninput="changeColor('hair',this.value)">
-
 </div>
 
 <div class="color-row">
-
 <span>Outfit</span>
-
 <input
 id="shirtColor"
 type="color"
 value="#806cff"
 oninput="changeColor('shirt',this.value)">
-
 </div>
 
 <div class="color-row">
-
 <span>Pants</span>
-
 <input
 id="pantsColor"
 type="color"
 value="#35405c"
 oninput="changeColor('pants',this.value)">
-
 </div>
 
 <div class="color-row">
-
 <span>Shoes</span>
-
 <input
 id="shoesColor"
 type="color"
 value="#ffffff"
 oninput="changeColor('shoes',this.value)">
-
 </div>
 
 </div>
 
-<div class="character-title">
-✨ Your Character
+<div class="character-title">✨ Your Character</div>
+
+<div class="character-subtitle">
+Make it yours!
 </div>
 
 <div class="character">
@@ -966,56 +1048,42 @@ oninput="changeColor('shoes',this.value)">
 
 <div class="head">
 
-<div
-class="hair long"
-id="hair">
+<div class="hair long" id="hair">
+<div class="fringe"></div>
 </div>
 
 <div class="eye left"></div>
-
 <div class="eye right"></div>
 
+<div class="blush left"></div>
+<div class="blush right"></div>
+
+<div class="nose"></div>
 <div class="smile"></div>
 
 </div>
 
-<div
-class="avatar-body"
-id="shirt">
+<div class="neck"></div>
+
+<div class="avatar-body" id="shirt">
+<div class="shirt-logo">★</div>
 </div>
 
 <div class="legs">
 
-<div
-class="leg"
-id="pants1">
-</div>
-
-<div
-class="leg"
-id="pants2">
-</div>
+<div class="leg" id="pants1"></div>
+<div class="leg" id="pants2"></div>
 
 </div>
 
 <div class="shoes">
 
-<div
-class="shoe"
-id="shoe1">
-</div>
-
-<div
-class="shoe"
-id="shoe2">
-</div>
+<div class="shoe" id="shoe1"></div>
+<div class="shoe" id="shoe2"></div>
 
 </div>
 
-<div
-class="accessory"
-id="accessory">
-</div>
+<div class="accessory" id="accessory"></div>
 
 </div>
 
@@ -1025,111 +1093,73 @@ id="accessory">
 
 <div class="options-area">
 
-<h1>
-Customize Character
-</h1>
+<h1>Customize Character</h1>
 
-<p>
-Create your own Study Quest character ✨
-</p>
+<p>Create your own Study Quest character ✨</p>
 
 <div class="categories">
 
-<button
-class="category active"
+<button class="category active"
 onclick="showCategory('hair',this)">
-
 💇 Hair
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="showCategory('face',this)">
-
 😊 Face
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="showCategory('clothes',this)">
-
 👕 Outfit
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="showCategory('pants',this)">
-
 👖 Pants
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="showCategory('shoes',this)">
-
 👟 Shoes
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="showCategory('accessories',this)">
-
 🎒 Accessories
-
 </button>
 
 </div>
 
-<div
-class="items"
-id="items">
-</div>
+<div class="items" id="items"></div>
 
-<button
-class="save-character"
+<button class="save-character"
 onclick="saveCharacter()">
-
 💾 Save Character
-
 </button>
 
 </div>
 
 </div>
-
 </div>
 
 <script>
 
 /* =========================
-VARIABLES
+DATA
 ========================= */
 
 let language="en";
-
 let gender="";
 
 let character={
-
-hair:"#4b3428",
-
-shirt:"#806cff",
-
-pants:"#35405c",
-
-shoes:"#ffffff",
-
-hairStyle:"long",
-
-face:"normal",
-
-accessory:"none"
-
+    hair:"#493126",
+    shirt:"#806cff",
+    pants:"#35405c",
+    shoes:"#ffffff",
+    hairStyle:"long",
+    face:"normal",
+    accessory:"none"
 };
 
 
@@ -1139,87 +1169,82 @@ LANGUAGE
 
 function setLanguage(lang){
 
-language=lang;
+    language=lang;
 
-document
-.getElementById("englishBtn")
-.classList
-.toggle("active",lang==="en");
+    document
+    .getElementById("englishBtn")
+    .classList
+    .toggle("active",lang==="en");
 
-document
-.getElementById("arabicBtn")
-.classList
-.toggle("active",lang==="ar");
+    document
+    .getElementById("arabicBtn")
+    .classList
+    .toggle("active",lang==="ar");
 
+    if(lang==="ar"){
 
-if(lang==="ar"){
+        document.documentElement.lang="ar";
+        document.documentElement.dir="rtl";
 
-document.documentElement.lang="ar";
+        document.querySelector(".subtitle").textContent=
+            "ابدأ رحلتك الدراسية";
 
-document.documentElement.dir="rtl";
+        document.querySelector(".language-title").textContent=
+            "🌍 اللغة";
 
-document.querySelector(".subtitle")
-.textContent="ابدأ رحلتك الدراسية";
+        document.getElementById("nameLabel").textContent=
+            "👤 الاسم";
 
-document.querySelector(".language-title")
-.textContent="🌍 اللغة";
+        document.getElementById("ageLabel").textContent=
+            "🎂 السن";
 
-document.getElementById("nameLabel")
-.textContent="👤 الاسم";
+        document.getElementById("schoolLabel").textContent=
+            "🎓 السنة الدراسية";
 
-document.getElementById("ageLabel")
-.textContent="🎂 السن";
+        document.getElementById("genderTitle").textContent=
+            "👤 اختار نوع شخصيتك";
 
-document.getElementById("schoolLabel")
-.textContent="🎓 السنة الدراسية";
+        document.getElementById("name").placeholder=
+            "اكتب اسمك";
 
-document.getElementById("genderTitle")
-.textContent="👤 اختار نوع شخصيتك";
+        document.getElementById("age").placeholder=
+            "اكتب سنك";
 
-document.getElementById("name")
-.placeholder="اكتب اسمك";
+        document.querySelector(".continue").textContent=
+            "متابعة ←";
 
-document.getElementById("age")
-.placeholder="اكتب سنك";
+    }else{
 
-document.querySelector(".continue")
-.textContent="متابعة ←";
+        document.documentElement.lang="en";
+        document.documentElement.dir="ltr";
 
-}else{
+        document.querySelector(".subtitle").textContent=
+            "Start your study journey";
 
-document.documentElement.lang="en";
+        document.querySelector(".language-title").textContent=
+            "🌍 Language";
 
-document.documentElement.dir="ltr";
+        document.getElementById("nameLabel").textContent=
+            "👤 Name";
 
-document.querySelector(".subtitle")
-.textContent="Start your study journey";
+        document.getElementById("ageLabel").textContent=
+            "🎂 Age";
 
-document.querySelector(".language-title")
-.textContent="🌍 Language";
+        document.getElementById("schoolLabel").textContent=
+            "🎓 School year";
 
-document.getElementById("nameLabel")
-.textContent="👤 Name";
+        document.getElementById("genderTitle").textContent=
+            "👤 Choose your character type";
 
-document.getElementById("ageLabel")
-.textContent="🎂 Age";
+        document.getElementById("name").placeholder=
+            "Enter your name";
 
-document.getElementById("schoolLabel")
-.textContent="🎓 School year";
+        document.getElementById("age").placeholder=
+            "Enter your age";
 
-document.getElementById("genderTitle")
-.textContent="👤 Choose your character type";
-
-document.getElementById("name")
-.placeholder="Enter your name";
-
-document.getElementById("age")
-.placeholder="Enter your age";
-
-document.querySelector(".continue")
-.textContent="Continue →";
-
-}
-
+        document.querySelector(".continue").textContent=
+            "Continue →";
+    }
 }
 
 
@@ -1229,36 +1254,32 @@ GENDER
 
 function chooseGender(type){
 
-gender=type;
+    gender=type;
 
+    document
+    .getElementById("girlBtn")
+    .classList.remove("selected","girl");
 
-document
-.getElementById("girlBtn")
-.classList.remove("selected","girl");
+    document
+    .getElementById("boyBtn")
+    .classList.remove("selected","boy");
 
-document
-.getElementById("boyBtn")
-.classList.remove("selected","boy");
+    if(type==="girl"){
 
+        document
+        .getElementById("girlBtn")
+        .classList.add("selected","girl");
 
-if(type==="girl"){
+        document.body.className="girl";
 
-document
-.getElementById("girlBtn")
-.classList.add("selected","girl");
+    }else{
 
-document.body.className="girl";
+        document
+        .getElementById("boyBtn")
+        .classList.add("selected","boy");
 
-}else{
-
-document
-.getElementById("boyBtn")
-.classList.add("selected","boy");
-
-document.body.className="boy";
-
-}
-
+        document.body.className="boy";
+    }
 }
 
 
@@ -1268,73 +1289,34 @@ CONTINUE
 
 function continueApp(){
 
-const name=document
-.getElementById("name")
-.value
-.trim();
+    const name=document.getElementById("name").value.trim();
+    const age=document.getElementById("age").value;
+    const school=document.getElementById("school").value;
 
-const age=document
-.getElementById("age")
-.value;
+    if(!name || !age || !school || !gender){
 
-const school=document
-.getElementById("school")
-.value;
+        alert(
+            language==="ar"
+            ?"من فضلك كمّل كل البيانات ❤️"
+            :"Please complete all the information ❤️"
+        );
 
+        return;
+    }
 
-if(!name || !age || !school || !gender){
+    localStorage.setItem("studyQuestName",name);
+    localStorage.setItem("studyQuestAge",age);
+    localStorage.setItem("studyQuestSchool",school);
+    localStorage.setItem("studyQuestGender",gender);
+    localStorage.setItem("studyQuestLanguage",language);
 
-alert(
-language==="ar"
-?"من فضلك كمّل كل البيانات ❤️"
-:"Please complete all the information ❤️"
-);
+    document.getElementById("loginScreen").style.display="none";
+    document.getElementById("customizeScreen").style.display="block";
 
-return;
-
-}
-
-
-localStorage.setItem(
-"studyQuestName",
-name
-);
-
-localStorage.setItem(
-"studyQuestAge",
-age
-);
-
-localStorage.setItem(
-"studyQuestSchool",
-school
-);
-
-localStorage.setItem(
-"studyQuestGender",
-gender
-);
-
-localStorage.setItem(
-"studyQuestLanguage",
-language
-);
-
-
-document
-.getElementById("loginScreen")
-.style.display="none";
-
-document
-.getElementById("customizeScreen")
-.style.display="block";
-
-
-showCategory(
-"hair",
-document.querySelector(".category")
-);
-
+    showCategory(
+        "hair",
+        document.querySelector(".category")
+    );
 }
 
 
@@ -1344,334 +1326,267 @@ CATEGORY
 
 function showCategory(category,button){
 
-document
-.querySelectorAll(".category")
-.forEach(
-b=>b.classList.remove("active")
-);
+    document
+    .querySelectorAll(".category")
+    .forEach(b=>b.classList.remove("active"));
 
-button.classList.add("active");
+    button.classList.add("active");
 
+    const items=document.getElementById("items");
 
-const items=document
-.getElementById("items");
+    items.innerHTML="";
 
-items.innerHTML="";
 
+    /* HAIR */
 
-/* HAIR */
+    if(category==="hair"){
 
-if(category==="hair"){
+        items.innerHTML=`
 
-items.innerHTML=`
+        <button class="item hair-option"
+        onclick="hairStyle('long',this)">
+            <span class="hair-preview long"></span>
+            <small>Long</small>
+        </button>
 
-<button class="item hair-option"
-onclick="hairStyle('long',this)">
+        <button class="item hair-option"
+        onclick="hairStyle('short',this)">
+            <span class="hair-preview short"></span>
+            <small>Short</small>
+        </button>
 
-<span class="hair-preview long"></span>
+        <button class="item hair-option"
+        onclick="hairStyle('curly',this)">
+            <span class="hair-preview curly"></span>
+            <small>Curly</small>
+        </button>
 
-<small>Long</small>
+        <button class="item hair-option"
+        onclick="hairStyle('ponytail',this)">
+            <span class="hair-preview ponytail"></span>
+            <small>Ponytail</small>
+        </button>
 
-</button>
+        <button class="item hair-option"
+        onclick="hairStyle('bun',this)">
+            <span class="hair-preview bun"></span>
+            <small>Bun</small>
+        </button>
 
+        <button class="item hair-option"
+        onclick="hairStyle('wavy',this)">
+            <span class="hair-preview wavy"></span>
+            <small>Wavy</small>
+        </button>
 
-<button class="item hair-option"
-onclick="hairStyle('short',this)">
+        `;
+    }
 
-<span class="hair-preview short"></span>
 
-<small>Short</small>
+    /* FACE */
 
-</button>
+    if(category==="face"){
 
+        items.innerHTML=`
 
-<button class="item hair-option"
-onclick="hairStyle('curly',this)">
+        <button class="item"
+        onclick="faceStyle('normal',this)">
+            😊
+            <small>Normal</small>
+        </button>
 
-<span class="hair-preview curly"></span>
+        <button class="item"
+        onclick="faceStyle('happy',this)">
+            😄
+            <small>Happy</small>
+        </button>
 
-<small>Curly</small>
+        <button class="item"
+        onclick="faceStyle('calm',this)">
+            😌
+            <small>Calm</small>
+        </button>
 
-</button>
+        <button class="item"
+        onclick="faceStyle('cool',this)">
+            😎
+            <small>Cool</small>
+        </button>
 
+        `;
+    }
 
-<button class="item hair-option"
-onclick="hairStyle('ponytail',this)">
 
-<span class="hair-preview ponytail"></span>
+    /* CLOTHES */
 
-<small>Ponytail</small>
+    if(category==="clothes"){
 
-</button>
+        items.innerHTML=`
 
-
-<button class="item hair-option"
-onclick="hairStyle('bun',this)">
-
-<span class="hair-preview bun"></span>
-
-<small>Bun</small>
-
-</button>
-
-
-<button class="item hair-option"
-onclick="hairStyle('wavy',this)">
-
-<span class="hair-preview wavy"></span>
-
-<small>Wavy</small>
-
-</button>
-
-`;
-
-}
-
-
-/* FACE */
-
-if(category==="face"){
-
-items.innerHTML=`
-
-<button class="item"
-onclick="faceStyle('normal',this)">
-😊
-<br>
-<small>Normal</small>
-</button>
-
-<button class="item"
-onclick="faceStyle('happy',this)">
-😄
-<br>
-<small>Happy</small>
-</button>
-
-<button class="item"
-onclick="faceStyle('calm',this)">
-😌
-<br>
-<small>Calm</small>
-</button>
-
-<button class="item"
-onclick="faceStyle('cool',this)">
-😎
-<br>
-<small>Cool</small>
-</button>
-
-`;
-
-}
-
-
-/* CLOTHES */
-
-if(category==="clothes"){
-
-items.innerHTML=`
-
-<button class="item"
-onclick="changeColor('shirt','#806cff');selectItem(this)">
-👕
-<br>
-<small>T-Shirt</small>
-</button>
-
-<button class="item"
-onclick="changeColor('shirt','#ff72ae');selectItem(this)">
-👚
-<br>
-<small>Sweater</small>
-</button>
-
-<button class="item"
-onclick="changeColor('shirt','#4d9cff');selectItem(this)">
-🧥
-<br>
-<small>Jacket</small>
-</button>
-
-<button class="item"
-onclick="changeColor('shirt','#54b88b');selectItem(this)">
-🧶
-<br>
-<small>Oversized</small>
-</button>
-
-<button class="item"
-onclick="changeColor('shirt','#f0a64b');selectItem(this)">
-🏃
-<br>
-<small>Sport</small>
-</button>
-
-<button class="item"
-onclick="changeColor('shirt','#444444');selectItem(this)">
-🎮
-<br>
-<small>Gaming</small>
-</button>
-
-<button class="item"
-onclick="changeColor('shirt','#e66b5d');selectItem(this)">
-👔
-<br>
-<small>Shirt</small>
-</button>
-
-<button class="item"
-onclick="changeColor('shirt','#7b61a8');selectItem(this)">
-🎓
-<br>
-<small>School</small>
-</button>
-
-`;
-
-}
-
-
-/* PANTS */
-
-if(category==="pants"){
-
-items.innerHTML=`
-
-<button class="item"
-onclick="changeColor('pants','#35405c');selectItem(this)">
-👖
-<br>
-<small>Jeans</small>
-</button>
-
-<button class="item"
-onclick="changeColor('pants','#496c9e');selectItem(this)">
-🩳
-<br>
-<small>Shorts</small>
-</button>
-
-<button class="item"
-onclick="changeColor('pants','#754c36');selectItem(this)">
-👖
-<br>
-<small>Cargo</small>
-</button>
-
-`;
-
-}
-
-
-/* SHOES */
-
-if(category==="shoes"){
-
-items.innerHTML=`
-
-<button class="item"
-onclick="changeColor('shoes','#ffffff');selectItem(this)">
-👟
-<br>
-<small>Sneakers</small>
-</button>
-
-<button class="item"
-onclick="changeColor('shoes','#222222');selectItem(this)">
-🥾
-<br>
-<small>Boots</small>
-</button>
-
-<button class="item"
-onclick="changeColor('shoes','#ff72ae');selectItem(this)">
-👟
-<br>
-<small>Pink</small>
-</button>
-
-<button class="item"
-onclick="changeColor('shoes','#4d9cff');selectItem(this)">
-👟
-<br>
-<small>Blue</small>
-</button>
-
-<button class="item"
-onclick="changeColor('shoes','#54b88b');selectItem(this)">
-👟
-<br>
-<small>Sport</small>
-</button>
-
-<button class="item"
-onclick="changeColor('shoes','#f0a64b');selectItem(this)">
-👞
-<br>
-<small>Classic</small>
-</button>
-
-`;
-
-}
-
-
-/* ACCESSORIES */
-
-if(category==="accessories"){
-
-items.innerHTML=`
-
-<button class="item"
-onclick="setAccessory('🎒',this)">
-🎒
-<br>
-<small>Backpack</small>
-</button>
-
-<button class="item"
-onclick="setAccessory('🎧',this)">
-🎧
-<br>
-<small>Headphones</small>
-</button>
-
-<button class="item"
-onclick="setAccessory('🧢',this)">
-🧢
-<br>
-<small>Cap</small>
-</button>
-
-<button class="item"
-onclick="setAccessory('👓',this)">
-👓
-<br>
-<small>Glasses</small>
-</button>
-
-<button class="item"
-onclick="setAccessory('⌚',this)">
-⌚
-<br>
-<small>Watch</small>
-</button>
-
-<button class="item"
-onclick="setAccessory('📚',this)">
-📚
-<br>
-<small>Books</small>
-</button>
-
-`;
-
-}
-
+        <button class="item"
+        onclick="changeColor('shirt','#806cff');selectItem(this)">
+            👕
+            <small>T-Shirt</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('shirt','#ff72ae');selectItem(this)">
+            👚
+            <small>Sweater</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('shirt','#4d9cff');selectItem(this)">
+            🧥
+            <small>Jacket</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('shirt','#54b88b');selectItem(this)">
+            🧶
+            <small>Oversized</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('shirt','#f0a64b');selectItem(this)">
+            🏃
+            <small>Sport</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('shirt','#444444');selectItem(this)">
+            🎮
+            <small>Gaming</small>
+        </button>
+
+        `;
+    }
+
+
+    /* PANTS */
+
+    if(category==="pants"){
+
+        items.innerHTML=`
+
+        <button class="item"
+        onclick="changeColor('pants','#35405c');selectItem(this)">
+            👖
+            <small>Jeans</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('pants','#496c9e');selectItem(this)">
+            🩳
+            <small>Shorts</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('pants','#754c36');selectItem(this)">
+            👖
+            <small>Cargo</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('pants','#20222b');selectItem(this)">
+            👖
+            <small>Black</small>
+        </button>
+
+        `;
+    }
+
+
+    /* SHOES */
+
+    if(category==="shoes"){
+
+        items.innerHTML=`
+
+        <button class="item"
+        onclick="changeColor('shoes','#ffffff');selectItem(this)">
+            👟
+            <small>White</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('shoes','#222222');selectItem(this)">
+            🥾
+            <small>Black</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('shoes','#ff72ae');selectItem(this)">
+            👟
+            <small>Pink</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('shoes','#4d9cff');selectItem(this)">
+            👟
+            <small>Blue</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('shoes','#54b88b');selectItem(this)">
+            👟
+            <small>Green</small>
+        </button>
+
+        <button class="item"
+        onclick="changeColor('shoes','#f0a64b');selectItem(this)">
+            👞
+            <small>Classic</small>
+        </button>
+
+        `;
+    }
+
+
+    /* ACCESSORIES */
+
+    if(category==="accessories"){
+
+        items.innerHTML=`
+
+        <button class="item"
+        onclick="setAccessory('🎒',this)">
+            🎒
+            <small>Backpack</small>
+        </button>
+
+        <button class="item"
+        onclick="setAccessory('🎧',this)">
+            🎧
+            <small>Headphones</small>
+        </button>
+
+        <button class="item"
+        onclick="setAccessory('🧢',this)">
+            🧢
+            <small>Cap</small>
+        </button>
+
+        <button class="item"
+        onclick="setAccessory('👓',this)">
+            👓
+            <small>Glasses</small>
+        </button>
+
+        <button class="item"
+        onclick="setAccessory('⌚',this)">
+            ⌚
+            <small>Watch</small>
+        </button>
+
+        <button class="item"
+        onclick="setAccessory('📚',this)">
+            📚
+            <small>Books</small>
+        </button>
+
+        `;
+    }
 }
 
 
@@ -1681,44 +1596,19 @@ HAIR
 
 function hairStyle(style,button){
 
-character.hairStyle=style;
+    character.hairStyle=style;
 
-const hair=document
-.getElementById("hair");
+    const hair=document.getElementById("hair");
 
-hair.className="hair";
+    hair.className="hair";
 
-hair.style.height="";
-hair.style.borderRadius="";
-hair.style.boxShadow="";
+    hair.style.height="";
+    hair.style.borderRadius="";
+    hair.style.boxShadow="";
 
+    hair.classList.add(style);
 
-if(style==="long"){
-    hair.classList.add("long");
-}
-
-if(style==="short"){
-    hair.classList.add("short");
-}
-
-if(style==="curly"){
-    hair.classList.add("curly");
-}
-
-if(style==="ponytail"){
-    hair.classList.add("ponytail");
-}
-
-if(style==="bun"){
-    hair.classList.add("bun");
-}
-
-if(style==="wavy"){
-    hair.classList.add("wavy");
-}
-
-selectItem(button);
-
+    selectItem(button);
 }
 
 
@@ -1728,128 +1618,85 @@ FACE
 
 function faceStyle(style,button){
 
-character.face=style;
+    character.face=style;
 
-const eyes=document
-.querySelectorAll(".eye");
+    const eyes=document.querySelectorAll(".eye");
+    const smile=document.querySelector(".smile");
 
-const smile=document
-.querySelector(".smile");
+    if(style==="cool"){
 
+        eyes.forEach(e=>{
+            e.style.height="8px";
+        });
 
-if(style==="cool"){
+        smile.style.width="22px";
 
-eyes.forEach(
-e=>e.style.height="7px"
-);
+    }else if(style==="happy"){
 
-smile.style.width="20px";
+        eyes.forEach(e=>{
+            e.style.height="14px";
+        });
 
-}
+        smile.style.width="40px";
 
-else if(style==="happy"){
+    }else if(style==="calm"){
 
-eyes.forEach(
-e=>e.style.height="13px"
-);
+        eyes.forEach(e=>{
+            e.style.height="11px";
+        });
 
-smile.style.width="38px";
+        smile.style.width="27px";
 
-}
+    }else{
 
-else if(style==="calm"){
+        eyes.forEach(e=>{
+            e.style.height="20px";
+        });
 
-eyes.forEach(
-e=>e.style.height="10px"
-);
+        smile.style.width="34px";
+    }
 
-smile.style.width="25px";
-
-}
-
-else{
-
-eyes.forEach(
-e=>e.style.height="16px"
-);
-
-smile.style.width="31px";
-
-}
-
-selectItem(button);
-
+    selectItem(button);
 }
 
 
 /* =========================
-COLOR
+COLORS
 ========================= */
 
 function changeColor(type,color){
 
-character[type]=color;
+    character[type]=color;
 
+    if(type==="hair"){
 
-if(type==="hair"){
+        document.getElementById("hair").style.background=color;
+        document.getElementById("hairColor").value=color;
 
-document
-.getElementById("hair")
-.style.background=color;
+    }
 
-document
-.getElementById("hairColor")
-.value=color;
+    if(type==="shirt"){
 
-}
+        document.getElementById("shirt").style.background=color;
+        document.getElementById("shirtColor").value=color;
 
+    }
 
-if(type==="shirt"){
+    if(type==="pants"){
 
-document
-.getElementById("shirt")
-.style.background=color;
+        document.getElementById("pants1").style.background=color;
+        document.getElementById("pants2").style.background=color;
+        document.getElementById("pantsColor").value=color;
 
-document
-.getElementById("shirtColor")
-.value=color;
+    }
 
-}
+    if(type==="shoes"){
 
+        document.getElementById("shoe1").style.background=color;
+        document.getElementById("shoe2").style.background=color;
+        document.getElementById("shoesColor").value=color;
 
-if(type==="pants"){
-
-document
-.getElementById("pants1")
-.style.background=color;
-
-document
-.getElementById("pants2")
-.style.background=color;
-
-document
-.getElementById("pantsColor")
-.value=color;
-
-}
-
-
-if(type==="shoes"){
-
-document
-.getElementById("shoe1")
-.style.background=color;
-
-document
-.getElementById("shoe2")
-.style.background=color;
-
-document
-.getElementById("shoesColor")
-.value=color;
-
-}
-
+    }
 }
 
 
@@ -1859,17 +1706,14 @@ ACCESSORY
 
 function setAccessory(item,button){
 
-character.accessory=item;
+    character.accessory=item;
 
-const accessory=document
-.getElementById("accessory");
+    const accessory=document.getElementById("accessory");
 
-accessory.textContent=item;
+    accessory.textContent=item;
+    accessory.style.display="block";
 
-accessory.style.display="block";
-
-selectItem(button);
-
+    selectItem(button);
 }
 
 
@@ -1879,14 +1723,11 @@ SELECT
 
 function selectItem(button){
 
-document
-.querySelectorAll(".item")
-.forEach(
-b=>b.classList.remove("selected")
-);
+    document
+    .querySelectorAll(".item")
+    .forEach(b=>b.classList.remove("selected"));
 
-button.classList.add("selected");
-
+    button.classList.add("selected");
 }
 
 
@@ -1896,10 +1737,10 @@ COLOR PANEL
 
 function toggleColors(){
 
-document
-.getElementById("colorPanel")
-.classList.toggle("open");
-
+    document
+    .getElementById("colorPanel")
+    .classList
+    .toggle("open");
 }
 
 
@@ -1909,17 +1750,16 @@ SAVE
 
 function saveCharacter(){
 
-localStorage.setItem(
-"studyQuestCharacter",
-JSON.stringify(character)
-);
+    localStorage.setItem(
+        "studyQuestCharacter",
+        JSON.stringify(character)
+    );
 
-alert(
-language==="ar"
-?"تم حفظ شخصيتك بنجاح ✨"
-:"Your character has been saved ✨"
-);
-
+    alert(
+        language==="ar"
+        ?"تم حفظ شخصيتك بنجاح ✨"
+        :"Your character has been saved ✨"
+    );
 }
 
 </script>
