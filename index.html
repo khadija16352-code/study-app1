@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Study Quest - Avatar Creator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Quest ✨</title>
 
 <style>
 *{
@@ -15,23 +15,26 @@
 body{
     font-family:Arial,sans-serif;
     min-height:100vh;
-    background:linear-gradient(135deg,#f8e9ff,#e8f3ff);
-    color:#29243a;
+    background:
+        radial-gradient(circle at 10% 10%,#ffdff0 0,transparent 30%),
+        radial-gradient(circle at 90% 90%,#d9ecff 0,transparent 35%),
+        linear-gradient(135deg,#f7f3ff,#eef8ff);
+    color:#302b43;
 }
 
 .app{
     width:min(1200px,94%);
     min-height:90vh;
     margin:5vh auto;
-    background:rgba(255,255,255,.88);
-    border-radius:35px;
+    background:rgba(255,255,255,.9);
+    border-radius:32px;
     overflow:hidden;
     display:grid;
     grid-template-columns:48% 52%;
-    box-shadow:0 25px 80px rgba(60,40,100,.15);
+    box-shadow:0 25px 70px rgba(60,40,100,.16);
 }
 
-/* ================= AVATAR ================= */
+/* ================= PREVIEW ================= */
 
 .preview{
     position:relative;
@@ -41,80 +44,290 @@ body{
     align-items:center;
     justify-content:center;
     background:
-        radial-gradient(circle at 50% 35%,#fff 0%,#f9f2ff 45%,#eee7ff 100%);
+        radial-gradient(circle at 50% 25%,#ffffff 0,#faf5ff 45%,#eee8ff 100%);
 }
 
-.preview h2{
+.preview-title{
     position:absolute;
     top:30px;
-    font-size:28px;
+    font-size:29px;
+    font-weight:800;
 }
 
 .avatar-box{
-    width:380px;
-    height:650px;
     position:relative;
+    width:330px;
+    height:570px;
     display:flex;
+    flex-direction:column;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-start;
+    padding-top:80px;
+    animation:float 3s ease-in-out infinite;
 }
 
-/*
-   كل العناصر دي Layers.
-   لما نضيف ملفات PNG حقيقية،
-   كل صورة هتتحط في مكانها.
-*/
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+}
 
-.layer{
+/* الأرض */
+
+.floor{
     position:absolute;
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    pointer-events:none;
+    bottom:25px;
+    width:210px;
+    height:35px;
+    border-radius:50%;
+    background:rgba(70,60,110,.12);
 }
 
-.base{
-    z-index:1;
+/* ================= PERSON ================= */
+
+.head{
+    position:relative;
+    width:145px;
+    height:150px;
+    background:#f3c7a7;
+    border-radius:48% 48% 45% 45%;
+    z-index:5;
+    box-shadow:inset -7px -5px 0 rgba(180,100,70,.08);
 }
 
-.face{
+/* الشعر */
+
+.hair{
+    position:absolute;
+    top:-25px;
+    left:-8px;
+    width:161px;
+    height:85px;
+    background:#633f2d;
+    border-radius:80px 80px 35px 35px;
+    z-index:8;
+    transition:.3s;
+}
+
+.hair.long::before,
+.hair.long::after{
+    content:"";
+    position:absolute;
+    top:38px;
+    width:38px;
+    height:125px;
+    background:inherit;
+    border-radius:25px;
+}
+
+.hair.long::before{left:0}
+.hair.long::after{right:0}
+
+.hair.short{
+    height:62px;
+    border-radius:65px 65px 25px 25px;
+}
+
+.hair.curly{
+    height:95px;
+    border-radius:50%;
+    box-shadow:
+        -16px 13px 0 #633f2d,
+        16px 13px 0 #633f2d,
+        -9px 28px 0 #633f2d,
+        9px 28px 0 #633f2d;
+}
+
+.hair.ponytail{
+    height:78px;
+}
+
+.hair.ponytail::after{
+    content:"";
+    position:absolute;
+    width:43px;
+    height:105px;
+    background:inherit;
+    border-radius:50%;
+    right:-30px;
+    top:35px;
+}
+
+.hair.bun{
+    height:68px;
+}
+
+.hair.bun::after{
+    content:"";
+    position:absolute;
+    width:58px;
+    height:58px;
+    background:inherit;
+    border-radius:50%;
+    top:-38px;
+    left:51px;
+}
+
+.hair.wavy{
+    height:92px;
+    border-radius:48% 52% 35% 50%;
+}
+
+/* الوجه */
+
+.eye{
+    position:absolute;
+    top:65px;
+    width:13px;
+    height:17px;
+    background:#28252c;
+    border-radius:50%;
+    z-index:10;
+    transition:.3s;
+}
+
+.eye::after{
+    content:"";
+    position:absolute;
+    width:4px;
+    height:5px;
+    background:white;
+    border-radius:50%;
+    top:2px;
+    left:2px;
+}
+
+.eye.left{left:34px}
+.eye.right{right:34px}
+
+.smile{
+    position:absolute;
+    top:98px;
+    left:54px;
+    width:38px;
+    height:17px;
+    border-bottom:4px solid #44333a;
+    border-radius:50%;
+    z-index:10;
+    transition:.3s;
+}
+
+/* الجسم */
+
+.body{
+    position:relative;
+    width:175px;
+    height:155px;
+    background:#f39abb;
+    border-radius:38px 38px 25px 25px;
+    z-index:3;
+    margin-top:0;
+    transition:.3s;
+}
+
+.body::before,
+.body::after{
+    content:"";
+    position:absolute;
+    top:25px;
+    width:38px;
+    height:105px;
+    background:inherit;
+    border-radius:25px;
+}
+
+.body::before{
+    left:-28px;
+    transform:rotate(8deg);
+}
+
+.body::after{
+    right:-28px;
+    transform:rotate(-8deg);
+}
+
+/* البنطلون */
+
+.legs{
+    display:flex;
+    gap:18px;
     z-index:2;
 }
 
-.hair{
-    z-index:3;
+.leg{
+    width:53px;
+    height:105px;
+    background:#58729a;
+    border-radius:0 0 20px 20px;
+    transition:.3s;
 }
 
-.clothes{
+/* الحذاء */
+
+.shoes{
+    display:flex;
+    gap:12px;
+    margin-top:-2px;
     z-index:4;
 }
 
-.pants{
-    z-index:5;
+.shoe{
+    width:75px;
+    height:32px;
+    background:white;
+    border-radius:20px 20px 14px 14px;
+    box-shadow:0 5px 0 rgba(0,0,0,.08);
+    transition:.3s;
 }
 
-.shoes{
-    z-index:6;
+/* إكسسوار */
+
+.accessory{
+    position:absolute;
+    z-index:20;
+    font-size:45px;
+    display:none;
+    transition:.3s;
 }
 
-.accessories{
-    z-index:7;
+.accessory.show{
+    display:block;
 }
 
-/* الصورة الحالية كمرجع */
-
-.reference{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    border-radius:20px;
+.accessory.backpack{
+    right:35px;
+    top:280px;
 }
 
-/* زر القلم */
+.accessory.headphones{
+    top:65px;
+    left:82px;
+}
+
+.accessory.cap{
+    top:38px;
+    left:112px;
+}
+
+.accessory.glasses{
+    top:145px;
+    left:140px;
+}
+
+.accessory.watch{
+    right:75px;
+    top:300px;
+}
+
+.accessory.books{
+    left:35px;
+    top:300px;
+}
+
+/* ================= PEN ================= */
 
 .edit-btn{
     position:absolute;
-    left:25px;
+    left:20px;
     top:50%;
     transform:translateY(-50%);
     width:58px;
@@ -125,123 +338,21 @@ body{
     box-shadow:0 10px 30px rgba(0,0,0,.13);
     font-size:25px;
     cursor:pointer;
-    transition:.2s;
-    z-index:20;
+    z-index:40;
 }
 
 .edit-btn:hover{
     transform:translateY(-50%) scale(1.08);
 }
 
-/* ================= CONTROLS ================= */
-
-.controls{
-    padding:45px;
-    overflow-y:auto;
-}
-
-.controls h1{
-    font-size:32px;
-    margin-bottom:8px;
-}
-
-.subtitle{
-    color:#85818d;
-    margin-bottom:28px;
-}
-
-.gender{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-bottom:25px;
-}
-
-.gender button{
-    border:2px solid #eee;
-    background:#fff;
-    border-radius:18px;
-    padding:17px;
-    font-size:16px;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.gender button:hover{
-    transform:translateY(-2px);
-}
-
-.gender .selected.girl{
-    border-color:#ff77b5;
-    background:#fff0f7;
-}
-
-.gender .selected.boy{
-    border-color:#579dff;
-    background:#eef7ff;
-}
-
-.categories{
-    display:flex;
-    flex-wrap:wrap;
-    gap:9px;
-    margin-bottom:25px;
-}
-
-.category{
-    border:0;
-    padding:12px 16px;
-    border-radius:14px;
-    background:#f1eff7;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.category.active{
-    background:#806cff;
-    color:white;
-}
-
-.options{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-}
-
-.option{
-    min-height:105px;
-    border:2px solid #eee;
-    background:white;
-    border-radius:18px;
-    cursor:pointer;
-    font-size:27px;
-    transition:.2s;
-}
-
-.option:hover{
-    transform:translateY(-3px);
-    border-color:#806cff;
-}
-
-.option.selected{
-    border-color:#806cff;
-    background:#f5f2ff;
-}
-
-.option small{
-    display:block;
-    margin-top:7px;
-    font-size:12px;
-}
-
-/* ================= COLOR PANEL ================= */
+/* ================= COLORS ================= */
 
 .color-panel{
     position:absolute;
-    left:95px;
+    left:90px;
     top:50%;
     transform:translateY(-50%);
-    width:210px;
+    width:215px;
     padding:18px;
     border-radius:22px;
     background:white;
@@ -269,9 +380,113 @@ body{
     width:50px;
     height:35px;
     border:0;
-    padding:0;
-    background:none;
     cursor:pointer;
+}
+
+/* ================= CONTROLS ================= */
+
+.controls{
+    padding:42px;
+    overflow-y:auto;
+}
+
+.controls h1{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#85818d;
+    margin-bottom:28px;
+}
+
+.gender{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin:15px 0 25px;
+}
+
+.gender button{
+    border:2px solid #eee;
+    background:white;
+    border-radius:18px;
+    padding:17px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.gender button:hover{
+    transform:translateY(-2px);
+}
+
+.gender .selected.girl{
+    border-color:#ff70ad;
+    background:#fff0f7;
+}
+
+.gender .selected.boy{
+    border-color:#559cff;
+    background:#eef7ff;
+}
+
+.categories{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-bottom:22px;
+}
+
+.category{
+    border:0;
+    padding:12px 15px;
+    border-radius:14px;
+    background:#f0eef6;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.category:hover{
+    transform:translateY(-2px);
+}
+
+.category.active{
+    background:#806cff;
+    color:white;
+}
+
+.options{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.option{
+    min-height:105px;
+    border:2px solid #eee;
+    background:white;
+    border-radius:18px;
+    cursor:pointer;
+    font-size:28px;
+    transition:.2s;
+}
+
+.option:hover{
+    transform:translateY(-3px);
+    border-color:#806cff;
+}
+
+.option.selected{
+    border-color:#806cff;
+    background:#f5f2ff;
+}
+
+.option small{
+    display:block;
+    margin-top:7px;
+    font-size:12px;
 }
 
 .save{
@@ -281,7 +496,7 @@ body{
     border:0;
     border-radius:16px;
     background:#806cff;
-    color:#fff;
+    color:white;
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
@@ -297,7 +512,7 @@ body{
 
     .app{
         grid-template-columns:1fr;
-        margin:15px auto;
+        margin:12px auto;
     }
 
     .preview{
@@ -305,8 +520,7 @@ body{
     }
 
     .avatar-box{
-        width:320px;
-        height:560px;
+        transform:scale(.85);
     }
 
     .controls{
@@ -314,11 +528,11 @@ body{
     }
 
     .edit-btn{
-        left:12px;
+        left:10px;
     }
 
     .color-panel{
-        left:75px;
+        left:70px;
     }
 }
 </style>
@@ -328,286 +542,237 @@ body{
 
 <div class="app">
 
-    <!-- ================= PREVIEW ================= -->
+<!-- ================= PREVIEW ================= -->
 
-    <section class="preview">
+<section class="preview">
 
-        <h2>✨ شخصيتك</h2>
+    <div class="preview-title">
+        ✨ شخصيتك
+    </div>
 
-        <button class="edit-btn" onclick="toggleColors()">
-            ✏️
-        </button>
+    <button class="edit-btn" onclick="toggleColors()">
+        ✏️
+    </button>
 
-        <div class="color-panel" id="colorPanel">
+    <div class="color-panel" id="colorPanel">
 
-            <h3>🎨 الألوان</h3>
+        <h3>🎨 الألوان</h3>
 
-            <div class="color-row">
-                <span>الشعر</span>
-                <input
-                    type="color"
-                    value="#75452f"
-                    onchange="setColor('hair',this.value)">
-            </div>
+        <div class="color-row">
+            <span>الشعر</span>
+            <input type="color" value="#633f2d"
+                   oninput="setColor('hair',this.value)">
+        </div>
 
-            <div class="color-row">
-                <span>الملابس</span>
-                <input
-                    type="color"
-                    value="#f3a9c1"
-                    onchange="setColor('clothes',this.value)">
-            </div>
+        <div class="color-row">
+            <span>الملابس</span>
+            <input type="color" value="#f39abb"
+                   oninput="setColor('body',this.value)">
+        </div>
 
-            <div class="color-row">
-                <span>البنطلون</span>
-                <input
-                    type="color"
-                    value="#6684a9"
-                    onchange="setColor('pants',this.value)">
-            </div>
+        <div class="color-row">
+            <span>البنطلون</span>
+            <input type="color" value="#58729a"
+                   oninput="setColor('pants',this.value)">
+        </div>
 
-            <div class="color-row">
-                <span>الحذاء</span>
-                <input
-                    type="color"
-                    value="#ffffff"
-                    onchange="setColor('shoes',this.value)">
-            </div>
+        <div class="color-row">
+            <span>الحذاء</span>
+            <input type="color" value="#ffffff"
+                   oninput="setColor('shoes',this.value)">
+        </div>
+
+    </div>
+
+    <div class="avatar-box">
+
+        <div class="floor"></div>
+
+        <div class="head">
+
+            <div class="hair long" id="hair"></div>
+
+            <div class="eye left" id="eye1"></div>
+            <div class="eye right" id="eye2"></div>
+
+            <div class="smile" id="smile"></div>
 
         </div>
 
-        <div class="avatar-box">
+        <div class="body" id="body"></div>
 
-            <!-- الصورة المرجعية -->
-            <img
-                src="avatar-base.jpg"
-                class="reference"
-                id="reference">
-
-            <!-- Layers مستقبلية -->
-            <img class="layer base" id="baseLayer">
-            <img class="layer face" id="faceLayer">
-            <img class="layer hair" id="hairLayer">
-            <img class="layer clothes" id="clothesLayer">
-            <img class="layer pants" id="pantsLayer">
-            <img class="layer shoes" id="shoesLayer">
-            <img class="layer accessories" id="accessoriesLayer">
-
+        <div class="legs">
+            <div class="leg" id="leg1"></div>
+            <div class="leg" id="leg2"></div>
         </div>
 
-    </section>
+        <div class="shoes">
+            <div class="shoe" id="shoe1"></div>
+            <div class="shoe" id="shoe2"></div>
+        </div>
+
+        <div class="accessory" id="accessory"></div>
+
+    </div>
+
+</section>
 
 
-    <!-- ================= CONTROLS ================= -->
+<!-- ================= CONTROLS ================= -->
 
-    <section class="controls">
+<section class="controls">
 
-        <h1>اصنعي شخصيتك ✨</h1>
+    <h1>اصنعي شخصيتك ✨</h1>
 
-        <p class="subtitle">
-            اختاري كل جزء من شخصيتك بنفسك
-        </p>
+    <p class="subtitle">
+        اختاري كل جزء من شخصيتك بنفسك
+    </p>
 
+    <h3>👤 الشخصية</h3>
 
-        <!-- GENDER -->
+    <div class="gender">
 
-        <h3>👤 الشخصية</h3>
-
-        <div class="gender">
-
-            <button
-                id="girl"
+        <button id="girl"
                 onclick="chooseGender('girl')">
-
-                👧
-                <br>
-                بنت
-
-            </button>
-
-            <button
-                id="boy"
-                onclick="chooseGender('boy')">
-
-                👦
-                <br>
-                ولد
-
-            </button>
-
-        </div>
-
-
-        <!-- CATEGORIES -->
-
-        <div class="categories">
-
-            <button
-                class="category active"
-                onclick="showCategory('hair',this)">
-                💇 الشعر
-            </button>
-
-            <button
-                class="category"
-                onclick="showCategory('face',this)">
-                😊 الوجه
-            </button>
-
-            <button
-                class="category"
-                onclick="showCategory('clothes',this)">
-                👕 الملابس
-            </button>
-
-            <button
-                class="category"
-                onclick="showCategory('pants',this)">
-                👖 البنطلون
-            </button>
-
-            <button
-                class="category"
-                onclick="showCategory('shoes',this)">
-                👟 الحذاء
-            </button>
-
-            <button
-                class="category"
-                onclick="showCategory('accessories',this)">
-                🎒 الإكسسوارات
-            </button>
-
-        </div>
-
-
-        <div class="options" id="options"></div>
-
-
-        <button class="save" onclick="saveAvatar()">
-            💾 حفظ الشخصية
+            👧
+            <br>
+            بنت
         </button>
 
-    </section>
+        <button id="boy"
+                onclick="chooseGender('boy')">
+            👦
+            <br>
+            ولد
+        </button>
+
+    </div>
+
+    <div class="categories">
+
+        <button class="category active"
+                onclick="showCategory('hair',this)">
+            💇 الشعر
+        </button>
+
+        <button class="category"
+                onclick="showCategory('face',this)">
+            😊 الوجه
+        </button>
+
+        <button class="category"
+                onclick="showCategory('clothes',this)">
+            👕 الملابس
+        </button>
+
+        <button class="category"
+                onclick="showCategory('pants',this)">
+            👖 البنطلون
+        </button>
+
+        <button class="category"
+                onclick="showCategory('shoes',this)">
+            👟 الحذاء
+        </button>
+
+        <button class="category"
+                onclick="showCategory('accessories',this)">
+            🎒 الإكسسوارات
+        </button>
+
+    </div>
+
+    <div class="options" id="options"></div>
+
+    <button class="save" onclick="saveAvatar()">
+        💾 حفظ الشخصية
+    </button>
+
+</section>
 
 </div>
 
 
 <script>
 
-/* =========================
-DATA
-========================= */
+/* ================= DATA ================= */
 
 let avatar = {
-
     gender:"girl",
-
-    hair:"ponytail",
-
+    hair:"long",
     face:"normal",
-
     clothes:"hoodie",
-
     pants:"jeans",
-
     shoes:"sneakers",
-
     accessory:"none"
-
 };
 
 
-/* =========================
-GENDER
-========================= */
+/* ================= GENDER ================= */
 
 function chooseGender(type){
 
     avatar.gender = type;
 
-    document
-        .getElementById("girl")
-        .classList
-        .remove("selected","girl");
+    const girl = document.getElementById("girl");
+    const boy = document.getElementById("boy");
 
-    document
-        .getElementById("boy")
-        .classList
-        .remove("selected","boy");
+    girl.classList.remove("selected","girl");
+    boy.classList.remove("selected","boy");
 
     if(type === "girl"){
-
-        document
-            .getElementById("girl")
-            .classList
-            .add("selected","girl");
-
+        girl.classList.add("selected","girl");
     }else{
-
-        document
-            .getElementById("boy")
-            .classList
-            .add("selected","boy");
-
+        boy.classList.add("selected","boy");
     }
 
-    /*
-      هنا بعدين نغير Layers
-      الخاصة بالولد أو البنت.
-    */
+    updateCharacter();
 }
 
 
-/* =========================
-CATEGORY
-========================= */
+/* ================= CATEGORY ================= */
 
 function showCategory(category,button){
 
     document
         .querySelectorAll(".category")
-        .forEach(b =>
-            b.classList.remove("active")
-        );
+        .forEach(b => b.classList.remove("active"));
 
     button.classList.add("active");
 
-    const options =
-        document.getElementById("options");
-
+    const options = document.getElementById("options");
     options.innerHTML = "";
 
 
     if(category === "hair"){
 
-        addOption("💇‍♀️","Ponytail","hair","ponytail");
-        addOption("💇","Long","hair","long");
-        addOption("💇‍♀️","Short","hair","short");
-        addOption("🌀","Curly","hair","curly");
-        addOption("👱‍♀️","Bun","hair","bun");
-        addOption("🌊","Wavy","hair","wavy");
+        addOption("💇‍♀️","طويل","hair","long");
+        addOption("💇","قصير","hair","short");
+        addOption("🌀","كيرلي","hair","curly");
+        addOption("🎀","ذيل حصان","hair","ponytail");
+        addOption("👱‍♀️","كعكة","hair","bun");
+        addOption("🌊","ويفي","hair","wavy");
 
     }
 
 
     if(category === "face"){
 
-        addOption("😊","Normal","face","normal");
-        addOption("😄","Happy","face","happy");
-        addOption("😌","Calm","face","calm");
-        addOption("😎","Cool","face","cool");
+        addOption("😊","عادي","face","normal");
+        addOption("😄","سعيد","face","happy");
+        addOption("😌","هادئ","face","calm");
+        addOption("😎","كول","face","cool");
 
     }
 
 
     if(category === "clothes"){
 
-        addOption("🩷","Hoodie","clothes","hoodie");
-        addOption("👕","T-Shirt","clothes","shirt");
-        addOption("🧥","Jacket","clothes","jacket");
-        addOption("🎓","School","clothes","school");
-        addOption("🏃","Sport","clothes","sport");
+        addOption("🩷","هودي","clothes","hoodie");
+        addOption("👕","تي شيرت","clothes","shirt");
+        addOption("🧥","جاكيت","clothes","jacket");
+        addOption("🎓","مدرسي","clothes","school");
+        addOption("🏃","رياضي","clothes","sport");
         addOption("🎮","Gaming","clothes","gaming");
 
     }
@@ -615,45 +780,43 @@ function showCategory(category,button){
 
     if(category === "pants"){
 
-        addOption("👖","Jeans","pants","jeans");
-        addOption("🩳","Shorts","pants","shorts");
-        addOption("👖","Cargo","pants","cargo");
+        addOption("👖","جينز","pants","jeans");
+        addOption("🩳","شورت","pants","shorts");
+        addOption("👖","كارغو","pants","cargo");
 
     }
 
 
     if(category === "shoes"){
 
-        addOption("👟","Sneakers","shoes","sneakers");
-        addOption("🥾","Boots","shoes","boots");
-        addOption("👟","Pink","shoes","pink");
-        addOption("👟","Blue","shoes","blue");
+        addOption("👟","سنيكرز","shoes","sneakers");
+        addOption("🥾","بوت","shoes","boots");
+        addOption("🌸","وردي","shoes","pink");
+        addOption("💙","أزرق","shoes","blue");
 
     }
 
 
     if(category === "accessories"){
 
-        addOption("🎒","Backpack","accessory","backpack");
-        addOption("🎧","Headphones","accessory","headphones");
-        addOption("🧢","Cap","accessory","cap");
-        addOption("👓","Glasses","accessory","glasses");
-        addOption("⌚","Watch","accessory","watch");
-        addOption("📚","Books","accessory","books");
+        addOption("🎒","شنطة","accessory","backpack");
+        addOption("🎧","سماعات","accessory","headphones");
+        addOption("🧢","كاب","accessory","cap");
+        addOption("👓","نظارة","accessory","glasses");
+        addOption("⌚","ساعة","accessory","watch");
+        addOption("📚","كتب","accessory","books");
+        addOption("❌","بدون","accessory","none");
 
     }
 
 }
 
 
-/* =========================
-OPTIONS
-========================= */
+/* ================= OPTIONS ================= */
 
 function addOption(icon,name,type,value){
 
-    const button =
-        document.createElement("button");
+    const button = document.createElement("button");
 
     button.className = "option";
 
@@ -673,14 +836,11 @@ function addOption(icon,name,type,value){
 
         document
             .querySelectorAll(".option")
-            .forEach(x =>
-                x.classList.remove("selected")
-            );
+            .forEach(x => x.classList.remove("selected"));
 
         button.classList.add("selected");
 
-        updateLayers();
-
+        updateCharacter();
     };
 
     document
@@ -689,84 +849,205 @@ function addOption(icon,name,type,value){
 }
 
 
-/* =========================
-LAYERS
-========================= */
+/* ================= CHARACTER ================= */
 
-function updateLayers(){
+function updateCharacter(){
 
-    /*
-      هنا بنحدد ملفات الـLayers.
+    const hair = document.getElementById("hair");
 
-      مثال:
+    hair.className = "hair " + avatar.hair;
 
-      assets/girl/hair/ponytail.png
-      assets/girl/clothes/hoodie.png
-      assets/girl/pants/jeans.png
+    /* الولد */
+    if(avatar.gender === "boy"){
 
-      ولما نجهز الصور الحقيقية
-      هنفعلها هنا.
-    */
+        document.getElementById("body").style.background =
+            "#5b9ee8";
 
-    const gender = avatar.gender;
+        hair.style.background =
+            "#3d3029";
+
+        /* شكل شعر افتراضي أقصر للولد */
+        if(
+            avatar.hair === "long" ||
+            avatar.hair === "ponytail" ||
+            avatar.hair === "bun"
+        ){
+            hair.className = "hair short";
+        }
+
+    }
+
+    /* البنت */
+    else{
+
+        document.getElementById("body").style.background =
+            "#f39abb";
+
+    }
 
 
-    document.getElementById("hairLayer").src =
-        `assets/${gender}/hair/${avatar.hair}.png`;
+    /* الوجه */
 
-    document.getElementById("faceLayer").src =
-        `assets/${gender}/face/${avatar.face}.png`;
+    const eye1 = document.getElementById("eye1");
+    const eye2 = document.getElementById("eye2");
+    const smile = document.getElementById("smile");
 
-    document.getElementById("clothesLayer").src =
-        `assets/${gender}/clothes/${avatar.clothes}.png`;
+    if(avatar.face === "cool"){
 
-    document.getElementById("pantsLayer").src =
-        `assets/${gender}/pants/${avatar.pants}.png`;
+        eye1.style.height = "7px";
+        eye2.style.height = "7px";
+        smile.style.width = "24px";
 
-    document.getElementById("shoesLayer").src =
-        `assets/${gender}/shoes/${avatar.shoes}.png`;
+    }else if(avatar.face === "happy"){
 
-    if(avatar.accessory === "none"){
+        eye1.style.height = "13px";
+        eye2.style.height = "13px";
+        smile.style.width = "45px";
 
-        document.getElementById(
-            "accessoriesLayer"
-        ).src = "";
+    }else if(avatar.face === "calm"){
+
+        eye1.style.height = "10px";
+        eye2.style.height = "10px";
+        smile.style.width = "28px";
 
     }else{
 
-        document.getElementById(
-            "accessoriesLayer"
-        ).src =
-            `assets/${gender}/accessories/${avatar.accessory}.png`;
+        eye1.style.height = "17px";
+        eye2.style.height = "17px";
+        smile.style.width = "38px";
 
     }
+
+
+    /* الملابس */
+
+    const body = document.getElementById("body");
+
+    const clothesColors = {
+        hoodie:"#f39abb",
+        shirt:"#806cff",
+        jacket:"#4d9cff",
+        school:"#7b61a8",
+        sport:"#f0a64b",
+        gaming:"#444444"
+    };
+
+    body.style.background =
+        clothesColors[avatar.clothes] || "#806cff";
+
+
+    /* البنطلون */
+
+    const pantsColors = {
+        jeans:"#58729a",
+        shorts:"#6c8fc2",
+        cargo:"#79543e"
+    };
+
+    document.getElementById("leg1").style.background =
+        pantsColors[avatar.pants];
+
+    document.getElementById("leg2").style.background =
+        pantsColors[avatar.pants];
+
+
+    /* الحذاء */
+
+    const shoeColors = {
+        sneakers:"#ffffff",
+        boots:"#292929",
+        pink:"#ff77b5",
+        blue:"#579dff"
+    };
+
+    document.getElementById("shoe1").style.background =
+        shoeColors[avatar.shoes];
+
+    document.getElementById("shoe2").style.background =
+        shoeColors[avatar.shoes];
+
+
+    /* الإكسسوار */
+
+    const accessory = document.getElementById("accessory");
+
+    accessory.className = "accessory";
+
+    if(avatar.accessory !== "none"){
+
+        const icons = {
+            backpack:"🎒",
+            headphones:"🎧",
+            cap:"🧢",
+            glasses:"👓",
+            watch:"⌚",
+            books:"📚"
+        };
+
+        accessory.textContent =
+            icons[avatar.accessory];
+
+        accessory.classList.add(
+            "show",
+            avatar.accessory
+        );
+
+    }else{
+
+        accessory.textContent = "";
+    }
+
 }
 
 
-/* =========================
-COLORS
-========================= */
+/* ================= COLORS ================= */
 
 function setColor(type,color){
 
-    /*
-      لما تكون الـPNG Layers جاهزة،
-      نقدر نستخدم SVG أو filters
-      لتلوين الطبقة بدون تغيير باقي الشخصية.
-    */
+    if(type === "hair"){
 
-    console.log(
-        "Changing",
-        type,
-        "to",
-        color
-    );
+        document
+            .getElementById("hair")
+            .style.background = color;
+
+    }
+
+    if(type === "body"){
+
+        document
+            .getElementById("body")
+            .style.background = color;
+
+    }
+
+    if(type === "pants"){
+
+        document
+            .getElementById("leg1")
+            .style.background = color;
+
+        document
+            .getElementById("leg2")
+            .style.background = color;
+
+    }
+
+    if(type === "shoes"){
+
+        document
+            .getElementById("shoe1")
+            .style.background = color;
+
+        document
+            .getElementById("shoe2")
+            .style.background = color;
+
+    }
+
 }
 
 
-/* =========================
-COLOR PANEL
-========================= */
+/* ================= COLOR PANEL ================= */
 
 function toggleColors(){
 
@@ -778,9 +1059,7 @@ function toggleColors(){
 }
 
 
-/* =========================
-SAVE
-========================= */
+/* ================= SAVE ================= */
 
 function saveAvatar(){
 
@@ -794,9 +1073,7 @@ function saveAvatar(){
 }
 
 
-/* =========================
-START
-========================= */
+/* ================= START ================= */
 
 chooseGender("girl");
 
@@ -804,6 +1081,8 @@ showCategory(
     "hair",
     document.querySelector(".category")
 );
+
+updateCharacter();
 
 </script>
 
