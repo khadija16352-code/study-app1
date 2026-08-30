@@ -531,7 +531,107 @@ OPTIONS
     font-weight:bold;
     cursor:pointer;
 }
+/* =========================
+HAIR PREVIEWS
+========================= */
 
+.hair-option{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+.hair-option small{
+    font-size:12px;
+    color:#666;
+}
+
+.preview-hair{
+    width:48px;
+    height:48px;
+    display:block;
+    position:relative;
+    background:#4b3428;
+    border-radius:50% 50% 35% 35%;
+}
+
+/* Long */
+
+.long-preview{
+    height:55px;
+}
+
+.long-preview::before,
+.long-preview::after{
+    content:"";
+    position:absolute;
+    width:12px;
+    height:35px;
+    background:inherit;
+    top:25px;
+    border-radius:10px;
+}
+
+.long-preview::before{
+    left:2px;
+}
+
+.long-preview::after{
+    right:2px;
+}
+
+/* Short */
+
+.short-preview{
+    height:38px;
+    border-radius:50% 50% 25% 25%;
+}
+
+/* Curly */
+
+.curly-preview{
+    border-radius:45%;
+    box-shadow:
+        -8px 8px 0 #4b3428,
+        8px 8px 0 #4b3428,
+        0 13px 0 #4b3428;
+}
+
+/* Ponytail */
+
+.ponytail-preview::after{
+    content:"";
+    position:absolute;
+    width:20px;
+    height:38px;
+    background:inherit;
+    border-radius:50%;
+    right:-12px;
+    top:18px;
+}
+
+/* Bun */
+
+.bun-preview::after{
+    content:"";
+    position:absolute;
+    width:24px;
+    height:24px;
+    background:inherit;
+    border-radius:50%;
+    top:-15px;
+    left:12px;
+}
+
+/* Wavy */
+
+.wavy-preview{
+    border-radius:
+        45% 55% 40% 50%;
+    height:52px;
+}
 /* =========================
 MOBILE
 ========================= */
